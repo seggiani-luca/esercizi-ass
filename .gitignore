@@ -1,0 +1,10 @@
+# ignora tutto
+*
+
+# carica file con estensione
+!*.*
+
+# carica directory
+!*/
+
+*.lst
