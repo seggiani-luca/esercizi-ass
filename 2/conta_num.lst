@@ -1,0 +1,2126 @@
+GAS LISTING /tmp/cctMIvtL.s 			page 1
+
+
+   1              		.file	"main.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.file 0 "/home/luca/Desktop/Uni/tools/assembler" "./files/main.c"
+   5              		.globl	orig_termios
+   6              		.bss
+   7              		.align 32
+   8              		.type	orig_termios, @object
+   9              		.size	orig_termios, 60
+  10              	orig_termios:
+  11 0000 00000000 		.zero	60
+  11      00000000 
+  11      00000000 
+  11      00000000 
+  11      00000000 
+  12              		.text
+  13              		.globl	disableRawMode
+  14              		.type	disableRawMode, @function
+  15              	disableRawMode:
+  16              	.LFB6:
+  17              		.file 1 "./files/main.c"
+   1:./files/main.c **** #include <stdlib.h>
+   2:./files/main.c **** #include <termios.h>
+   3:./files/main.c **** #include <unistd.h>
+   4:./files/main.c **** #include <stdio.h>
+   5:./files/main.c **** #include <signal.h>
+   6:./files/main.c **** 
+   7:./files/main.c **** // This code is used to switch terminal in 'raw' mode at startup
+   8:./files/main.c **** // 'cooked': terminal input is buffered, and sent to program only after ENTER is pressed.
+   9:./files/main.c **** // 'raw': terminal input is not buffered, each keystroke is sent directly to the program
+  10:./files/main.c **** 
+  11:./files/main.c **** // Due to how our primitives work, we need 'raw' mode
+  12:./files/main.c **** 
+  13:./files/main.c **** // Credits to https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+  14:./files/main.c **** 
+  15:./files/main.c **** struct termios orig_termios;
+  16:./files/main.c **** 
+  17:./files/main.c **** void disableRawMode() {
+  18              		.loc 1 17 23
+  19              		.cfi_startproc
+  20 0000 55       		pushl	%ebp
+  21              		.cfi_def_cfa_offset 8
+  22              		.cfi_offset 5, -8
+  23 0001 89E5     		movl	%esp, %ebp
+  24              		.cfi_def_cfa_register 5
+  25 0003 53       		pushl	%ebx
+  26 0004 83EC04   		subl	$4, %esp
+  27              		.cfi_offset 3, -12
+  28 0007 E8FCFFFF 		call	__x86.get_pc_thunk.ax
+  28      FF
+  29 000c 05010000 		addl	$_GLOBAL_OFFSET_TABLE_, %eax
+  29      00
+  18:./files/main.c ****   tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+  30              		.loc 1 18 3
+  31 0011 83EC04   		subl	$4, %esp
+  32 0014 8D900000 		leal	orig_termios@GOTOFF(%eax), %edx
+  32      0000
+GAS LISTING /tmp/cctMIvtL.s 			page 2
+
+
+  33 001a 52       		pushl	%edx
+  34 001b 6A02     		pushl	$2
+  35 001d 6A00     		pushl	$0
+  36 001f 89C3     		movl	%eax, %ebx
+  37 0021 E8FCFFFF 		call	tcsetattr@PLT
+  37      FF
+  38 0026 83C410   		addl	$16, %esp
+  19:./files/main.c **** }
+  39              		.loc 1 19 1
+  40 0029 90       		nop
+  41 002a 8B5DFC   		movl	-4(%ebp), %ebx
+  42 002d C9       		leave
+  43              		.cfi_restore 5
+  44              		.cfi_restore 3
+  45              		.cfi_def_cfa 4, 4
+  46 002e C3       		ret
+  47              		.cfi_endproc
+  48              	.LFE6:
+  49              		.size	disableRawMode, .-disableRawMode
+  50              		.globl	enableRawMode
+  51              		.type	enableRawMode, @function
+  52              	enableRawMode:
+  53              	.LFB7:
+  20:./files/main.c **** 
+  21:./files/main.c **** void enableRawMode() {
+  54              		.loc 1 21 22
+  55              		.cfi_startproc
+  56 002f 55       		pushl	%ebp
+  57              		.cfi_def_cfa_offset 8
+  58              		.cfi_offset 5, -8
+  59 0030 89E5     		movl	%esp, %ebp
+  60              		.cfi_def_cfa_register 5
+  61 0032 53       		pushl	%ebx
+  62 0033 83EC44   		subl	$68, %esp
+  63              		.cfi_offset 3, -12
+  64 0036 E8FCFFFF 		call	__x86.get_pc_thunk.bx
+  64      FF
+  65 003b 81C30200 		addl	$_GLOBAL_OFFSET_TABLE_, %ebx
+  65      0000
+  66              		.loc 1 21 22
+  67 0041 65A11400 		movl	%gs:20, %eax
+  67      0000
+  68 0047 8945F4   		movl	%eax, -12(%ebp)
+  69 004a 31C0     		xorl	%eax, %eax
+  22:./files/main.c ****   tcgetattr(STDIN_FILENO, &orig_termios);
+  70              		.loc 1 22 3
+  71 004c 83EC08   		subl	$8, %esp
+  72 004f 8D830000 		leal	orig_termios@GOTOFF(%ebx), %eax
+  72      0000
+  73 0055 50       		pushl	%eax
+  74 0056 6A00     		pushl	$0
+  75 0058 E8FCFFFF 		call	tcgetattr@PLT
+  75      FF
+  76 005d 83C410   		addl	$16, %esp
+  23:./files/main.c ****   atexit(disableRawMode);
+  77              		.loc 1 23 3
+  78 0060 83EC0C   		subl	$12, %esp
+GAS LISTING /tmp/cctMIvtL.s 			page 3
+
+
+  79 0063 8D830000 		leal	disableRawMode@GOTOFF(%ebx), %eax
+  79      0000
+  80 0069 50       		pushl	%eax
+  81 006a E8FCFFFF 		call	atexit@PLT
+  81      FF
+  82 006f 83C410   		addl	$16, %esp
+  24:./files/main.c ****   struct termios raw = orig_termios;
+  83              		.loc 1 24 18
+  84 0072 660F6F83 		movdqa	orig_termios@GOTOFF(%ebx), %xmm0
+  84      00000000 
+  85 007a 0F1145B8 		movups	%xmm0, -72(%ebp)
+  86 007e 660F6F83 		movdqa	16+orig_termios@GOTOFF(%ebx), %xmm0
+  86      10000000 
+  87 0086 0F1145C8 		movups	%xmm0, -56(%ebp)
+  88 008a 660F6F83 		movdqa	32+orig_termios@GOTOFF(%ebx), %xmm0
+  88      20000000 
+  89 0092 0F1145D8 		movups	%xmm0, -40(%ebp)
+  90 0096 F30F6F83 		movdqu	44+orig_termios@GOTOFF(%ebx), %xmm0
+  90      2C000000 
+  91 009e 0F1145E4 		movups	%xmm0, -28(%ebp)
+  25:./files/main.c ****   raw.c_oflag &= ~(OPOST);
+  92              		.loc 1 25 6
+  93 00a2 8B45BC   		movl	-68(%ebp), %eax
+  94              		.loc 1 25 15
+  95 00a5 83E0FE   		andl	$-2, %eax
+  96 00a8 8945BC   		movl	%eax, -68(%ebp)
+  26:./files/main.c ****   raw.c_lflag &= ~(ECHO | ICANON);
+  97              		.loc 1 26 6
+  98 00ab 8B45C4   		movl	-60(%ebp), %eax
+  99              		.loc 1 26 15
+ 100 00ae 83E0F5   		andl	$-11, %eax
+ 101 00b1 8945C4   		movl	%eax, -60(%ebp)
+  27:./files/main.c ****   tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+ 102              		.loc 1 27 3
+ 103 00b4 83EC04   		subl	$4, %esp
+ 104 00b7 8D45B8   		leal	-72(%ebp), %eax
+ 105 00ba 50       		pushl	%eax
+ 106 00bb 6A02     		pushl	$2
+ 107 00bd 6A00     		pushl	$0
+ 108 00bf E8FCFFFF 		call	tcsetattr@PLT
+ 108      FF
+ 109 00c4 83C410   		addl	$16, %esp
+  28:./files/main.c **** }
+ 110              		.loc 1 28 1
+ 111 00c7 90       		nop
+ 112 00c8 8B45F4   		movl	-12(%ebp), %eax
+ 113 00cb 652B0514 		subl	%gs:20, %eax
+ 113      000000
+ 114 00d2 7405     		je	.L3
+ 115 00d4 E8FCFFFF 		call	__stack_chk_fail_local
+ 115      FF
+ 116              	.L3:
+ 117 00d9 8B5DFC   		movl	-4(%ebp), %ebx
+ 118 00dc C9       		leave
+ 119              		.cfi_restore 5
+ 120              		.cfi_restore 3
+ 121              		.cfi_def_cfa 4, 4
+GAS LISTING /tmp/cctMIvtL.s 			page 4
+
+
+ 122 00dd C3       		ret
+ 123              		.cfi_endproc
+ 124              	.LFE7:
+ 125              		.size	enableRawMode, .-enableRawMode
+ 126              		.section	.rodata
+ 127              	.LC0:
+ 128 0000 5365676D 		.string	"Segmentation fault\r"
+ 128      656E7461 
+ 128      74696F6E 
+ 128      20666175 
+ 128      6C740D00 
+ 129              		.text
+ 130              		.globl	handler
+ 131              		.type	handler, @function
+ 132              	handler:
+ 133              	.LFB8:
+  29:./files/main.c **** 
+  30:./files/main.c **** // This code is used to catch a segmentation fault and print a message
+  31:./files/main.c **** // The usual message is printed by bash, based on the exit status of the program (139)
+  32:./files/main.c **** // pwsh does not, so we have to do it manually
+  33:./files/main.c **** void handler(int sig) {
+ 134              		.loc 1 33 23
+ 135              		.cfi_startproc
+ 136 00de 55       		pushl	%ebp
+ 137              		.cfi_def_cfa_offset 8
+ 138              		.cfi_offset 5, -8
+ 139 00df 89E5     		movl	%esp, %ebp
+ 140              		.cfi_def_cfa_register 5
+ 141 00e1 53       		pushl	%ebx
+ 142 00e2 83EC04   		subl	$4, %esp
+ 143              		.cfi_offset 3, -12
+ 144 00e5 E8FCFFFF 		call	__x86.get_pc_thunk.bx
+ 144      FF
+ 145 00ea 81C30200 		addl	$_GLOBAL_OFFSET_TABLE_, %ebx
+ 145      0000
+  34:./files/main.c ****   printf("Segmentation fault\r\n");
+ 146              		.loc 1 34 3
+ 147 00f0 83EC0C   		subl	$12, %esp
+ 148 00f3 8D830000 		leal	.LC0@GOTOFF(%ebx), %eax
+ 148      0000
+ 149 00f9 50       		pushl	%eax
+ 150 00fa E8FCFFFF 		call	puts@PLT
+ 150      FF
+ 151 00ff 83C410   		addl	$16, %esp
+  35:./files/main.c ****   exit(128 + sig);
+ 152              		.loc 1 35 3
+ 153 0102 8B4508   		movl	8(%ebp), %eax
+ 154 0105 83E880   		subl	$-128, %eax
+ 155 0108 83EC0C   		subl	$12, %esp
+ 156 010b 50       		pushl	%eax
+ 157 010c E8FCFFFF 		call	exit@PLT
+ 157      FF
+ 158              		.cfi_endproc
+ 159              	.LFE8:
+ 160              		.size	handler, .-handler
+ 161              		.globl	main
+ 162              		.type	main, @function
+GAS LISTING /tmp/cctMIvtL.s 			page 5
+
+
+ 163              	main:
+ 164              	.LFB9:
+  36:./files/main.c **** }
+  37:./files/main.c **** 
+  38:./files/main.c **** // Entry point for the assembler code
+  39:./files/main.c **** extern int _main();
+  40:./files/main.c **** 
+  41:./files/main.c **** // Actual entrypoint for the program
+  42:./files/main.c **** // It is different from the DOS environment (main instead of _main) 
+  43:./files/main.c **** int main() {
+ 165              		.loc 1 43 12
+ 166              		.cfi_startproc
+ 167 0111 8D4C2404 		leal	4(%esp), %ecx
+ 168              		.cfi_def_cfa 1, 0
+ 169 0115 83E4F0   		andl	$-16, %esp
+ 170 0118 FF71FC   		pushl	-4(%ecx)
+ 171 011b 55       		pushl	%ebp
+ 172 011c 89E5     		movl	%esp, %ebp
+ 173              		.cfi_escape 0x10,0x5,0x2,0x75,0
+ 174 011e 53       		pushl	%ebx
+ 175 011f 51       		pushl	%ecx
+ 176              		.cfi_escape 0xf,0x3,0x75,0x78,0x6
+ 177              		.cfi_escape 0x10,0x3,0x2,0x75,0x7c
+ 178 0120 E8FCFFFF 		call	__x86.get_pc_thunk.bx
+ 178      FF
+ 179 0125 81C30200 		addl	$_GLOBAL_OFFSET_TABLE_, %ebx
+ 179      0000
+  44:./files/main.c ****     enableRawMode();
+ 180              		.loc 1 44 5
+ 181 012b E8FCFFFF 		call	enableRawMode
+ 181      FF
+  45:./files/main.c ****     signal(SIGSEGV, handler);
+ 182              		.loc 1 45 5
+ 183 0130 83EC08   		subl	$8, %esp
+ 184 0133 8D830000 		leal	handler@GOTOFF(%ebx), %eax
+ 184      0000
+ 185 0139 50       		pushl	%eax
+ 186 013a 6A0B     		pushl	$11
+ 187 013c E8FCFFFF 		call	signal@PLT
+ 187      FF
+ 188 0141 83C410   		addl	$16, %esp
+  46:./files/main.c ****     _main();
+ 189              		.loc 1 46 5
+ 190 0144 E8FCFFFF 		call	_main@PLT
+ 190      FF
+  47:./files/main.c ****     return 0;
+ 191              		.loc 1 47 12
+ 192 0149 B8000000 		movl	$0, %eax
+ 192      00
+  48:./files/main.c **** }...
+ 193              		.loc 1 48 1
+ 194 014e 8D65F8   		leal	-8(%ebp), %esp
+ 195 0151 59       		popl	%ecx
+ 196              		.cfi_restore 1
+ 197              		.cfi_def_cfa 1, 0
+ 198 0152 5B       		popl	%ebx
+ 199              		.cfi_restore 3
+GAS LISTING /tmp/cctMIvtL.s 			page 6
+
+
+ 200 0153 5D       		popl	%ebp
+ 201              		.cfi_restore 5
+ 202 0154 8D61FC   		leal	-4(%ecx), %esp
+ 203              		.cfi_def_cfa 4, 4
+ 204 0157 C3       		ret
+ 205              		.cfi_endproc
+ 206              	.LFE9:
+ 207              		.size	main, .-main
+ 208              		.section	.text.__x86.get_pc_thunk.ax,"axG",@progbits,__x86.get_pc_thunk.ax,comdat
+ 209              		.globl	__x86.get_pc_thunk.ax
+ 210              		.hidden	__x86.get_pc_thunk.ax
+ 211              		.type	__x86.get_pc_thunk.ax, @function
+ 212              	__x86.get_pc_thunk.ax:
+ 213              	.LFB10:
+ 214              		.cfi_startproc
+ 215 0000 8B0424   		movl	(%esp), %eax
+ 216 0003 C3       		ret
+ 217              		.cfi_endproc
+ 218              	.LFE10:
+ 219              		.section	.text.__x86.get_pc_thunk.bx,"axG",@progbits,__x86.get_pc_thunk.bx,comdat
+ 220              		.globl	__x86.get_pc_thunk.bx
+ 221              		.hidden	__x86.get_pc_thunk.bx
+ 222              		.type	__x86.get_pc_thunk.bx, @function
+ 223              	__x86.get_pc_thunk.bx:
+ 224              	.LFB11:
+ 225              		.cfi_startproc
+ 226 0000 8B1C24   		movl	(%esp), %ebx
+ 227 0003 C3       		ret
+ 228              		.cfi_endproc
+ 229              	.LFE11:
+ 230              		.text
+ 231              	.Letext0:
+ 232              		.file 2 "/usr/include/bits/termios.h"
+ 233              		.file 3 "/usr/include/bits/termios-struct.h"
+ 234              		.file 4 "/usr/include/signal.h"
+ 235              		.file 5 "/usr/include/stdlib.h"
+ 236              		.file 6 "/usr/include/termios.h"
+ 237              		.section	.debug_info,"",@progbits
+ 238              	.Ldebug_info0:
+ 239 0000 5C020000 		.long	0x25c
+ 240 0004 0500     		.value	0x5
+ 241 0006 01       		.byte	0x1
+ 242 0007 04       		.byte	0x4
+ 243 0008 00000000 		.long	.Ldebug_abbrev0
+ 244 000c 07       		.uleb128 0x7
+ 245 000d 05010000 		.long	.LASF29
+ 246 0011 1D       		.byte	0x1d
+ 247 0012 27000000 		.long	.LASF0
+ 248 0016 00000000 		.long	.LASF1
+ 249 001a 00000000 		.long	.Ltext0
+ 250 001e 58010000 		.long	.Letext0-.Ltext0
+ 251 0022 00000000 		.long	.Ldebug_line0
+ 252 0026 01       		.uleb128 0x1
+ 253 0027 04       		.byte	0x4
+ 254 0028 07       		.byte	0x7
+ 255 0029 EB000000 		.long	.LASF2
+ 256 002d 01       		.uleb128 0x1
+GAS LISTING /tmp/cctMIvtL.s 			page 7
+
+
+ 257 002e 04       		.byte	0x4
+ 258 002f 05       		.byte	0x5
+ 259 0030 80010000 		.long	.LASF3
+ 260 0034 08       		.uleb128 0x8
+ 261 0035 04       		.byte	0x4
+ 262 0036 05       		.byte	0x5
+ 263 0037 696E7400 		.string	"int"
+ 264 003b 01       		.uleb128 0x1
+ 265 003c 08       		.byte	0x8
+ 266 003d 05       		.byte	0x5
+ 267 003e 52010000 		.long	.LASF4
+ 268 0042 01       		.uleb128 0x1
+ 269 0043 01       		.byte	0x1
+ 270 0044 08       		.byte	0x8
+ 271 0045 93000000 		.long	.LASF5
+ 272 0049 01       		.uleb128 0x1
+ 273 004a 02       		.byte	0x2
+ 274 004b 07       		.byte	0x7
+ 275 004c 2C000000 		.long	.LASF6
+ 276 0050 01       		.uleb128 0x1
+ 277 0051 04       		.byte	0x4
+ 278 0052 07       		.byte	0x7
+ 279 0053 B8000000 		.long	.LASF7
+ 280 0057 01       		.uleb128 0x1
+ 281 0058 01       		.byte	0x1
+ 282 0059 06       		.byte	0x6
+ 283 005a 89010000 		.long	.LASF8
+ 284 005e 01       		.uleb128 0x1
+ 285 005f 02       		.byte	0x2
+ 286 0060 05       		.byte	0x5
+ 287 0061 76010000 		.long	.LASF9
+ 288 0065 01       		.uleb128 0x1
+ 289 0066 08       		.byte	0x8
+ 290 0067 07       		.byte	0x7
+ 291 0068 73000000 		.long	.LASF10
+ 292 006c 01       		.uleb128 0x1
+ 293 006d 01       		.byte	0x1
+ 294 006e 06       		.byte	0x6
+ 295 006f 60010000 		.long	.LASF11
+ 296 0073 04       		.uleb128 0x4
+ 297 0074 71010000 		.long	.LASF12
+ 298 0078 02       		.byte	0x2
+ 299 0079 17       		.byte	0x17
+ 300 007a 17       		.byte	0x17
+ 301 007b 42000000 		.long	0x42
+ 302 007f 04       		.uleb128 0x4
+ 303 0080 E3000000 		.long	.LASF13
+ 304 0084 02       		.byte	0x2
+ 305 0085 18       		.byte	0x18
+ 306 0086 16       		.byte	0x16
+ 307 0087 26000000 		.long	0x26
+ 308 008b 04       		.uleb128 0x4
+ 309 008c 8A000000 		.long	.LASF14
+ 310 0090 02       		.byte	0x2
+ 311 0091 19       		.byte	0x19
+ 312 0092 16       		.byte	0x16
+ 313 0093 26000000 		.long	0x26
+GAS LISTING /tmp/cctMIvtL.s 			page 8
+
+
+ 314 0097 09       		.uleb128 0x9
+ 315 0098 24000000 		.long	.LASF30
+ 316 009c 3C       		.byte	0x3c
+ 317 009d 03       		.byte	0x3
+ 318 009e 18       		.byte	0x18
+ 319 009f 08       		.byte	0x8
+ 320 00a0 05010000 		.long	0x105
+ 321 00a4 03       		.uleb128 0x3
+ 322 00a5 42010000 		.long	.LASF15
+ 323 00a9 1A       		.byte	0x1a
+ 324 00aa 0E       		.byte	0xe
+ 325 00ab 8B000000 		.long	0x8b
+ 326 00af 00       		.byte	0
+ 327 00b0 03       		.uleb128 0x3
+ 328 00b1 15000000 		.long	.LASF16
+ 329 00b5 1B       		.byte	0x1b
+ 330 00b6 0E       		.byte	0xe
+ 331 00b7 8B000000 		.long	0x8b
+ 332 00bb 04       		.byte	0x4
+ 333 00bc 03       		.uleb128 0x3
+ 334 00bd 3F000000 		.long	.LASF17
+ 335 00c1 1C       		.byte	0x1c
+ 336 00c2 0E       		.byte	0xe
+ 337 00c3 8B000000 		.long	0x8b
+ 338 00c7 08       		.byte	0x8
+ 339 00c8 03       		.uleb128 0x3
+ 340 00c9 CA000000 		.long	.LASF18
+ 341 00cd 1D       		.byte	0x1d
+ 342 00ce 0E       		.byte	0xe
+ 343 00cf 8B000000 		.long	0x8b
+ 344 00d3 0C       		.byte	0xc
+ 345 00d4 03       		.uleb128 0x3
+ 346 00d5 65010000 		.long	.LASF19
+ 347 00d9 1E       		.byte	0x1e
+ 348 00da 0A       		.byte	0xa
+ 349 00db 73000000 		.long	0x73
+ 350 00df 10       		.byte	0x10
+ 351 00e0 03       		.uleb128 0x3
+ 352 00e1 D2000000 		.long	.LASF20
+ 353 00e5 1F       		.byte	0x1f
+ 354 00e6 0A       		.byte	0xa
+ 355 00e7 0A010000 		.long	0x10a
+ 356 00eb 11       		.byte	0x11
+ 357 00ec 03       		.uleb128 0x3
+ 358 00ed AF000000 		.long	.LASF21
+ 359 00f1 20       		.byte	0x20
+ 360 00f2 0D       		.byte	0xd
+ 361 00f3 7F000000 		.long	0x7f
+ 362 00f7 34       		.byte	0x34
+ 363 00f8 03       		.uleb128 0x3
+ 364 00f9 47000000 		.long	.LASF22
+ 365 00fd 21       		.byte	0x21
+ 366 00fe 0D       		.byte	0xd
+ 367 00ff 7F000000 		.long	0x7f
+ 368 0103 38       		.byte	0x38
+ 369 0104 00       		.byte	0
+ 370 0105 0A       		.uleb128 0xa
+GAS LISTING /tmp/cctMIvtL.s 			page 9
+
+
+ 371 0106 97000000 		.long	0x97
+ 372 010a 0B       		.uleb128 0xb
+ 373 010b 73000000 		.long	0x73
+ 374 010f 1A010000 		.long	0x11a
+ 375 0113 0C       		.uleb128 0xc
+ 376 0114 26000000 		.long	0x26
+ 377 0118 1F       		.byte	0x1f
+ 378 0119 00       		.byte	0
+ 379 011a 04       		.uleb128 0x4
+ 380 011b 00000000 		.long	.LASF23
+ 381 011f 04       		.byte	0x4
+ 382 0120 48       		.byte	0x48
+ 383 0121 10       		.byte	0x10
+ 384 0122 26010000 		.long	0x126
+ 385 0126 05       		.uleb128 0x5
+ 386 0127 2B010000 		.long	0x12b
+ 387 012b 0D       		.uleb128 0xd
+ 388 012c 36010000 		.long	0x136
+ 389 0130 02       		.uleb128 0x2
+ 390 0131 34000000 		.long	0x34
+ 391 0135 00       		.byte	0
+ 392 0136 0E       		.uleb128 0xe
+ 393 0137 05       		.uleb128 0x5
+ 394 0138 36010000 		.long	0x136
+ 395 013c 0F       		.uleb128 0xf
+ 396 013d F8000000 		.long	.LASF31
+ 397 0141 01       		.byte	0x1
+ 398 0142 0F       		.byte	0xf
+ 399 0143 10       		.byte	0x10
+ 400 0144 97000000 		.long	0x97
+ 401 0148 05       		.uleb128 0x5
+ 402 0149 03       		.byte	0x3
+ 403 014a 00000000 		.long	orig_termios
+ 404 014e 10       		.uleb128 0x10
+ 405 014f 0F000000 		.long	.LASF32
+ 406 0153 01       		.byte	0x1
+ 407 0154 27       		.byte	0x27
+ 408 0155 0C       		.byte	0xc
+ 409 0156 34000000 		.long	0x34
+ 410 015a 60010000 		.long	0x160
+ 411 015e 11       		.uleb128 0x11
+ 412 015f 00       		.byte	0
+ 413 0160 06       		.uleb128 0x6
+ 414 0161 1D000000 		.long	.LASF24
+ 415 0165 04       		.byte	0x4
+ 416 0166 58       		.byte	0x58
+ 417 0167 17       		.byte	0x17
+ 418 0168 1A010000 		.long	0x11a
+ 419 016c 7B010000 		.long	0x17b
+ 420 0170 02       		.uleb128 0x2
+ 421 0171 34000000 		.long	0x34
+ 422 0175 02       		.uleb128 0x2
+ 423 0176 1A010000 		.long	0x11a
+ 424 017a 00       		.byte	0
+ 425 017b 12       		.uleb128 0x12
+ 426 017c 6C010000 		.long	.LASF25
+ 427 0180 05       		.byte	0x5
+GAS LISTING /tmp/cctMIvtL.s 			page 10
+
+
+ 428 0181 F402     		.value	0x2f4
+ 429 0183 0D       		.byte	0xd
+ 430 0184 8E010000 		.long	0x18e
+ 431 0188 02       		.uleb128 0x2
+ 432 0189 34000000 		.long	0x34
+ 433 018d 00       		.byte	0
+ 434 018e 13       		.uleb128 0x13
+ 435 018f DC000000 		.long	.LASF26
+ 436 0193 05       		.byte	0x5
+ 437 0194 DE02     		.value	0x2de
+ 438 0196 0C       		.byte	0xc
+ 439 0197 34000000 		.long	0x34
+ 440 019b A5010000 		.long	0x1a5
+ 441 019f 02       		.uleb128 0x2
+ 442 01a0 37010000 		.long	0x137
+ 443 01a4 00       		.byte	0
+ 444 01a5 06       		.uleb128 0x6
+ 445 01a6 50000000 		.long	.LASF27
+ 446 01aa 06       		.byte	0x6
+ 447 01ab 42       		.byte	0x42
+ 448 01ac 0C       		.byte	0xc
+ 449 01ad 34000000 		.long	0x34
+ 450 01b1 C0010000 		.long	0x1c0
+ 451 01b5 02       		.uleb128 0x2
+ 452 01b6 34000000 		.long	0x34
+ 453 01ba 02       		.uleb128 0x2
+ 454 01bb C0010000 		.long	0x1c0
+ 455 01bf 00       		.byte	0
+ 456 01c0 05       		.uleb128 0x5
+ 457 01c1 97000000 		.long	0x97
+ 458 01c5 06       		.uleb128 0x6
+ 459 01c6 5A000000 		.long	.LASF28
+ 460 01ca 06       		.byte	0x6
+ 461 01cb 46       		.byte	0x46
+ 462 01cc 0C       		.byte	0xc
+ 463 01cd 34000000 		.long	0x34
+ 464 01d1 E5010000 		.long	0x1e5
+ 465 01d5 02       		.uleb128 0x2
+ 466 01d6 34000000 		.long	0x34
+ 467 01da 02       		.uleb128 0x2
+ 468 01db 34000000 		.long	0x34
+ 469 01df 02       		.uleb128 0x2
+ 470 01e0 E5010000 		.long	0x1e5
+ 471 01e4 00       		.byte	0
+ 472 01e5 05       		.uleb128 0x5
+ 473 01e6 05010000 		.long	0x105
+ 474 01ea 14       		.uleb128 0x14
+ 475 01eb D7000000 		.long	.LASF33
+ 476 01ef 01       		.byte	0x1
+ 477 01f0 2B       		.byte	0x2b
+ 478 01f1 05       		.byte	0x5
+ 479 01f2 34000000 		.long	0x34
+ 480 01f6 11010000 		.long	.LFB9
+ 481 01fa 47000000 		.long	.LFE9-.LFB9
+ 482 01fe 01       		.uleb128 0x1
+ 483 01ff 9C       		.byte	0x9c
+ 484 0200 15       		.uleb128 0x15
+GAS LISTING /tmp/cctMIvtL.s 			page 11
+
+
+ 485 0201 4A010000 		.long	.LASF34
+ 486 0205 01       		.byte	0x1
+ 487 0206 21       		.byte	0x21
+ 488 0207 06       		.byte	0x6
+ 489 0208 DE000000 		.long	.LFB8
+ 490 020c 33000000 		.long	.LFE8-.LFB8
+ 491 0210 01       		.uleb128 0x1
+ 492 0211 9C       		.byte	0x9c
+ 493 0212 26020000 		.long	0x226
+ 494 0216 16       		.uleb128 0x16
+ 495 0217 73696700 		.string	"sig"
+ 496 021b 01       		.byte	0x1
+ 497 021c 21       		.byte	0x21
+ 498 021d 12       		.byte	0x12
+ 499 021e 34000000 		.long	0x34
+ 500 0222 02       		.uleb128 0x2
+ 501 0223 91       		.byte	0x91
+ 502 0224 00       		.sleb128 0
+ 503 0225 00       		.byte	0
+ 504 0226 17       		.uleb128 0x17
+ 505 0227 A1000000 		.long	.LASF35
+ 506 022b 01       		.byte	0x1
+ 507 022c 15       		.byte	0x15
+ 508 022d 06       		.byte	0x6
+ 509 022e 2F000000 		.long	.LFB7
+ 510 0232 AF000000 		.long	.LFE7-.LFB7
+ 511 0236 01       		.uleb128 0x1
+ 512 0237 9C       		.byte	0x9c
+ 513 0238 4D020000 		.long	0x24d
+ 514 023c 18       		.uleb128 0x18
+ 515 023d 72617700 		.string	"raw"
+ 516 0241 01       		.byte	0x1
+ 517 0242 18       		.byte	0x18
+ 518 0243 12       		.byte	0x12
+ 519 0244 97000000 		.long	0x97
+ 520 0248 03       		.uleb128 0x3
+ 521 0249 91       		.byte	0x91
+ 522 024a B07F     		.sleb128 -80
+ 523 024c 00       		.byte	0
+ 524 024d 19       		.uleb128 0x19
+ 525 024e 64000000 		.long	.LASF36
+ 526 0252 01       		.byte	0x1
+ 527 0253 11       		.byte	0x11
+ 528 0254 06       		.byte	0x6
+ 529 0255 00000000 		.long	.LFB6
+ 530 0259 2F000000 		.long	.LFE6-.LFB6
+ 531 025d 01       		.uleb128 0x1
+ 532 025e 9C       		.byte	0x9c
+ 533 025f 00       		.byte	0
+ 534              		.section	.debug_abbrev,"",@progbits
+ 535              	.Ldebug_abbrev0:
+ 536 0000 01       		.uleb128 0x1
+ 537 0001 24       		.uleb128 0x24
+ 538 0002 00       		.byte	0
+ 539 0003 0B       		.uleb128 0xb
+ 540 0004 0B       		.uleb128 0xb
+ 541 0005 3E       		.uleb128 0x3e
+GAS LISTING /tmp/cctMIvtL.s 			page 12
+
+
+ 542 0006 0B       		.uleb128 0xb
+ 543 0007 03       		.uleb128 0x3
+ 544 0008 0E       		.uleb128 0xe
+ 545 0009 00       		.byte	0
+ 546 000a 00       		.byte	0
+ 547 000b 02       		.uleb128 0x2
+ 548 000c 05       		.uleb128 0x5
+ 549 000d 00       		.byte	0
+ 550 000e 49       		.uleb128 0x49
+ 551 000f 13       		.uleb128 0x13
+ 552 0010 00       		.byte	0
+ 553 0011 00       		.byte	0
+ 554 0012 03       		.uleb128 0x3
+ 555 0013 0D       		.uleb128 0xd
+ 556 0014 00       		.byte	0
+ 557 0015 03       		.uleb128 0x3
+ 558 0016 0E       		.uleb128 0xe
+ 559 0017 3A       		.uleb128 0x3a
+ 560 0018 21       		.uleb128 0x21
+ 561 0019 03       		.sleb128 3
+ 562 001a 3B       		.uleb128 0x3b
+ 563 001b 0B       		.uleb128 0xb
+ 564 001c 39       		.uleb128 0x39
+ 565 001d 0B       		.uleb128 0xb
+ 566 001e 49       		.uleb128 0x49
+ 567 001f 13       		.uleb128 0x13
+ 568 0020 38       		.uleb128 0x38
+ 569 0021 0B       		.uleb128 0xb
+ 570 0022 00       		.byte	0
+ 571 0023 00       		.byte	0
+ 572 0024 04       		.uleb128 0x4
+ 573 0025 16       		.uleb128 0x16
+ 574 0026 00       		.byte	0
+ 575 0027 03       		.uleb128 0x3
+ 576 0028 0E       		.uleb128 0xe
+ 577 0029 3A       		.uleb128 0x3a
+ 578 002a 0B       		.uleb128 0xb
+ 579 002b 3B       		.uleb128 0x3b
+ 580 002c 0B       		.uleb128 0xb
+ 581 002d 39       		.uleb128 0x39
+ 582 002e 0B       		.uleb128 0xb
+ 583 002f 49       		.uleb128 0x49
+ 584 0030 13       		.uleb128 0x13
+ 585 0031 00       		.byte	0
+ 586 0032 00       		.byte	0
+ 587 0033 05       		.uleb128 0x5
+ 588 0034 0F       		.uleb128 0xf
+ 589 0035 00       		.byte	0
+ 590 0036 0B       		.uleb128 0xb
+ 591 0037 21       		.uleb128 0x21
+ 592 0038 04       		.sleb128 4
+ 593 0039 49       		.uleb128 0x49
+ 594 003a 13       		.uleb128 0x13
+ 595 003b 00       		.byte	0
+ 596 003c 00       		.byte	0
+ 597 003d 06       		.uleb128 0x6
+ 598 003e 2E       		.uleb128 0x2e
+GAS LISTING /tmp/cctMIvtL.s 			page 13
+
+
+ 599 003f 01       		.byte	0x1
+ 600 0040 3F       		.uleb128 0x3f
+ 601 0041 19       		.uleb128 0x19
+ 602 0042 03       		.uleb128 0x3
+ 603 0043 0E       		.uleb128 0xe
+ 604 0044 3A       		.uleb128 0x3a
+ 605 0045 0B       		.uleb128 0xb
+ 606 0046 3B       		.uleb128 0x3b
+ 607 0047 0B       		.uleb128 0xb
+ 608 0048 39       		.uleb128 0x39
+ 609 0049 0B       		.uleb128 0xb
+ 610 004a 27       		.uleb128 0x27
+ 611 004b 19       		.uleb128 0x19
+ 612 004c 49       		.uleb128 0x49
+ 613 004d 13       		.uleb128 0x13
+ 614 004e 3C       		.uleb128 0x3c
+ 615 004f 19       		.uleb128 0x19
+ 616 0050 01       		.uleb128 0x1
+ 617 0051 13       		.uleb128 0x13
+ 618 0052 00       		.byte	0
+ 619 0053 00       		.byte	0
+ 620 0054 07       		.uleb128 0x7
+ 621 0055 11       		.uleb128 0x11
+ 622 0056 01       		.byte	0x1
+ 623 0057 25       		.uleb128 0x25
+ 624 0058 0E       		.uleb128 0xe
+ 625 0059 13       		.uleb128 0x13
+ 626 005a 0B       		.uleb128 0xb
+ 627 005b 03       		.uleb128 0x3
+ 628 005c 1F       		.uleb128 0x1f
+ 629 005d 1B       		.uleb128 0x1b
+ 630 005e 1F       		.uleb128 0x1f
+ 631 005f 11       		.uleb128 0x11
+ 632 0060 01       		.uleb128 0x1
+ 633 0061 12       		.uleb128 0x12
+ 634 0062 06       		.uleb128 0x6
+ 635 0063 10       		.uleb128 0x10
+ 636 0064 17       		.uleb128 0x17
+ 637 0065 00       		.byte	0
+ 638 0066 00       		.byte	0
+ 639 0067 08       		.uleb128 0x8
+ 640 0068 24       		.uleb128 0x24
+ 641 0069 00       		.byte	0
+ 642 006a 0B       		.uleb128 0xb
+ 643 006b 0B       		.uleb128 0xb
+ 644 006c 3E       		.uleb128 0x3e
+ 645 006d 0B       		.uleb128 0xb
+ 646 006e 03       		.uleb128 0x3
+ 647 006f 08       		.uleb128 0x8
+ 648 0070 00       		.byte	0
+ 649 0071 00       		.byte	0
+ 650 0072 09       		.uleb128 0x9
+ 651 0073 13       		.uleb128 0x13
+ 652 0074 01       		.byte	0x1
+ 653 0075 03       		.uleb128 0x3
+ 654 0076 0E       		.uleb128 0xe
+ 655 0077 0B       		.uleb128 0xb
+GAS LISTING /tmp/cctMIvtL.s 			page 14
+
+
+ 656 0078 0B       		.uleb128 0xb
+ 657 0079 3A       		.uleb128 0x3a
+ 658 007a 0B       		.uleb128 0xb
+ 659 007b 3B       		.uleb128 0x3b
+ 660 007c 0B       		.uleb128 0xb
+ 661 007d 39       		.uleb128 0x39
+ 662 007e 0B       		.uleb128 0xb
+ 663 007f 01       		.uleb128 0x1
+ 664 0080 13       		.uleb128 0x13
+ 665 0081 00       		.byte	0
+ 666 0082 00       		.byte	0
+ 667 0083 0A       		.uleb128 0xa
+ 668 0084 26       		.uleb128 0x26
+ 669 0085 00       		.byte	0
+ 670 0086 49       		.uleb128 0x49
+ 671 0087 13       		.uleb128 0x13
+ 672 0088 00       		.byte	0
+ 673 0089 00       		.byte	0
+ 674 008a 0B       		.uleb128 0xb
+ 675 008b 01       		.uleb128 0x1
+ 676 008c 01       		.byte	0x1
+ 677 008d 49       		.uleb128 0x49
+ 678 008e 13       		.uleb128 0x13
+ 679 008f 01       		.uleb128 0x1
+ 680 0090 13       		.uleb128 0x13
+ 681 0091 00       		.byte	0
+ 682 0092 00       		.byte	0
+ 683 0093 0C       		.uleb128 0xc
+ 684 0094 21       		.uleb128 0x21
+ 685 0095 00       		.byte	0
+ 686 0096 49       		.uleb128 0x49
+ 687 0097 13       		.uleb128 0x13
+ 688 0098 2F       		.uleb128 0x2f
+ 689 0099 0B       		.uleb128 0xb
+ 690 009a 00       		.byte	0
+ 691 009b 00       		.byte	0
+ 692 009c 0D       		.uleb128 0xd
+ 693 009d 15       		.uleb128 0x15
+ 694 009e 01       		.byte	0x1
+ 695 009f 27       		.uleb128 0x27
+ 696 00a0 19       		.uleb128 0x19
+ 697 00a1 01       		.uleb128 0x1
+ 698 00a2 13       		.uleb128 0x13
+ 699 00a3 00       		.byte	0
+ 700 00a4 00       		.byte	0
+ 701 00a5 0E       		.uleb128 0xe
+ 702 00a6 15       		.uleb128 0x15
+ 703 00a7 00       		.byte	0
+ 704 00a8 27       		.uleb128 0x27
+ 705 00a9 19       		.uleb128 0x19
+ 706 00aa 00       		.byte	0
+ 707 00ab 00       		.byte	0
+ 708 00ac 0F       		.uleb128 0xf
+ 709 00ad 34       		.uleb128 0x34
+ 710 00ae 00       		.byte	0
+ 711 00af 03       		.uleb128 0x3
+ 712 00b0 0E       		.uleb128 0xe
+GAS LISTING /tmp/cctMIvtL.s 			page 15
+
+
+ 713 00b1 3A       		.uleb128 0x3a
+ 714 00b2 0B       		.uleb128 0xb
+ 715 00b3 3B       		.uleb128 0x3b
+ 716 00b4 0B       		.uleb128 0xb
+ 717 00b5 39       		.uleb128 0x39
+ 718 00b6 0B       		.uleb128 0xb
+ 719 00b7 49       		.uleb128 0x49
+ 720 00b8 13       		.uleb128 0x13
+ 721 00b9 3F       		.uleb128 0x3f
+ 722 00ba 19       		.uleb128 0x19
+ 723 00bb 02       		.uleb128 0x2
+ 724 00bc 18       		.uleb128 0x18
+ 725 00bd 00       		.byte	0
+ 726 00be 00       		.byte	0
+ 727 00bf 10       		.uleb128 0x10
+ 728 00c0 2E       		.uleb128 0x2e
+ 729 00c1 01       		.byte	0x1
+ 730 00c2 3F       		.uleb128 0x3f
+ 731 00c3 19       		.uleb128 0x19
+ 732 00c4 03       		.uleb128 0x3
+ 733 00c5 0E       		.uleb128 0xe
+ 734 00c6 3A       		.uleb128 0x3a
+ 735 00c7 0B       		.uleb128 0xb
+ 736 00c8 3B       		.uleb128 0x3b
+ 737 00c9 0B       		.uleb128 0xb
+ 738 00ca 39       		.uleb128 0x39
+ 739 00cb 0B       		.uleb128 0xb
+ 740 00cc 49       		.uleb128 0x49
+ 741 00cd 13       		.uleb128 0x13
+ 742 00ce 3C       		.uleb128 0x3c
+ 743 00cf 19       		.uleb128 0x19
+ 744 00d0 01       		.uleb128 0x1
+ 745 00d1 13       		.uleb128 0x13
+ 746 00d2 00       		.byte	0
+ 747 00d3 00       		.byte	0
+ 748 00d4 11       		.uleb128 0x11
+ 749 00d5 18       		.uleb128 0x18
+ 750 00d6 00       		.byte	0
+ 751 00d7 00       		.byte	0
+ 752 00d8 00       		.byte	0
+ 753 00d9 12       		.uleb128 0x12
+ 754 00da 2E       		.uleb128 0x2e
+ 755 00db 01       		.byte	0x1
+ 756 00dc 3F       		.uleb128 0x3f
+ 757 00dd 19       		.uleb128 0x19
+ 758 00de 03       		.uleb128 0x3
+ 759 00df 0E       		.uleb128 0xe
+ 760 00e0 3A       		.uleb128 0x3a
+ 761 00e1 0B       		.uleb128 0xb
+ 762 00e2 3B       		.uleb128 0x3b
+ 763 00e3 05       		.uleb128 0x5
+ 764 00e4 39       		.uleb128 0x39
+ 765 00e5 0B       		.uleb128 0xb
+ 766 00e6 27       		.uleb128 0x27
+ 767 00e7 19       		.uleb128 0x19
+ 768 00e8 8701     		.uleb128 0x87
+ 769 00ea 19       		.uleb128 0x19
+GAS LISTING /tmp/cctMIvtL.s 			page 16
+
+
+ 770 00eb 3C       		.uleb128 0x3c
+ 771 00ec 19       		.uleb128 0x19
+ 772 00ed 01       		.uleb128 0x1
+ 773 00ee 13       		.uleb128 0x13
+ 774 00ef 00       		.byte	0
+ 775 00f0 00       		.byte	0
+ 776 00f1 13       		.uleb128 0x13
+ 777 00f2 2E       		.uleb128 0x2e
+ 778 00f3 01       		.byte	0x1
+ 779 00f4 3F       		.uleb128 0x3f
+ 780 00f5 19       		.uleb128 0x19
+ 781 00f6 03       		.uleb128 0x3
+ 782 00f7 0E       		.uleb128 0xe
+ 783 00f8 3A       		.uleb128 0x3a
+ 784 00f9 0B       		.uleb128 0xb
+ 785 00fa 3B       		.uleb128 0x3b
+ 786 00fb 05       		.uleb128 0x5
+ 787 00fc 39       		.uleb128 0x39
+ 788 00fd 0B       		.uleb128 0xb
+ 789 00fe 27       		.uleb128 0x27
+ 790 00ff 19       		.uleb128 0x19
+ 791 0100 49       		.uleb128 0x49
+ 792 0101 13       		.uleb128 0x13
+ 793 0102 3C       		.uleb128 0x3c
+ 794 0103 19       		.uleb128 0x19
+ 795 0104 01       		.uleb128 0x1
+ 796 0105 13       		.uleb128 0x13
+ 797 0106 00       		.byte	0
+ 798 0107 00       		.byte	0
+ 799 0108 14       		.uleb128 0x14
+ 800 0109 2E       		.uleb128 0x2e
+ 801 010a 00       		.byte	0
+ 802 010b 3F       		.uleb128 0x3f
+ 803 010c 19       		.uleb128 0x19
+ 804 010d 03       		.uleb128 0x3
+ 805 010e 0E       		.uleb128 0xe
+ 806 010f 3A       		.uleb128 0x3a
+ 807 0110 0B       		.uleb128 0xb
+ 808 0111 3B       		.uleb128 0x3b
+ 809 0112 0B       		.uleb128 0xb
+ 810 0113 39       		.uleb128 0x39
+ 811 0114 0B       		.uleb128 0xb
+ 812 0115 49       		.uleb128 0x49
+ 813 0116 13       		.uleb128 0x13
+ 814 0117 11       		.uleb128 0x11
+ 815 0118 01       		.uleb128 0x1
+ 816 0119 12       		.uleb128 0x12
+ 817 011a 06       		.uleb128 0x6
+ 818 011b 40       		.uleb128 0x40
+ 819 011c 18       		.uleb128 0x18
+ 820 011d 7C       		.uleb128 0x7c
+ 821 011e 19       		.uleb128 0x19
+ 822 011f 00       		.byte	0
+ 823 0120 00       		.byte	0
+ 824 0121 15       		.uleb128 0x15
+ 825 0122 2E       		.uleb128 0x2e
+ 826 0123 01       		.byte	0x1
+GAS LISTING /tmp/cctMIvtL.s 			page 17
+
+
+ 827 0124 3F       		.uleb128 0x3f
+ 828 0125 19       		.uleb128 0x19
+ 829 0126 03       		.uleb128 0x3
+ 830 0127 0E       		.uleb128 0xe
+ 831 0128 3A       		.uleb128 0x3a
+ 832 0129 0B       		.uleb128 0xb
+ 833 012a 3B       		.uleb128 0x3b
+ 834 012b 0B       		.uleb128 0xb
+ 835 012c 39       		.uleb128 0x39
+ 836 012d 0B       		.uleb128 0xb
+ 837 012e 27       		.uleb128 0x27
+ 838 012f 19       		.uleb128 0x19
+ 839 0130 11       		.uleb128 0x11
+ 840 0131 01       		.uleb128 0x1
+ 841 0132 12       		.uleb128 0x12
+ 842 0133 06       		.uleb128 0x6
+ 843 0134 40       		.uleb128 0x40
+ 844 0135 18       		.uleb128 0x18
+ 845 0136 7C       		.uleb128 0x7c
+ 846 0137 19       		.uleb128 0x19
+ 847 0138 01       		.uleb128 0x1
+ 848 0139 13       		.uleb128 0x13
+ 849 013a 00       		.byte	0
+ 850 013b 00       		.byte	0
+ 851 013c 16       		.uleb128 0x16
+ 852 013d 05       		.uleb128 0x5
+ 853 013e 00       		.byte	0
+ 854 013f 03       		.uleb128 0x3
+ 855 0140 08       		.uleb128 0x8
+ 856 0141 3A       		.uleb128 0x3a
+ 857 0142 0B       		.uleb128 0xb
+ 858 0143 3B       		.uleb128 0x3b
+ 859 0144 0B       		.uleb128 0xb
+ 860 0145 39       		.uleb128 0x39
+ 861 0146 0B       		.uleb128 0xb
+ 862 0147 49       		.uleb128 0x49
+ 863 0148 13       		.uleb128 0x13
+ 864 0149 02       		.uleb128 0x2
+ 865 014a 18       		.uleb128 0x18
+ 866 014b 00       		.byte	0
+ 867 014c 00       		.byte	0
+ 868 014d 17       		.uleb128 0x17
+ 869 014e 2E       		.uleb128 0x2e
+ 870 014f 01       		.byte	0x1
+ 871 0150 3F       		.uleb128 0x3f
+ 872 0151 19       		.uleb128 0x19
+ 873 0152 03       		.uleb128 0x3
+ 874 0153 0E       		.uleb128 0xe
+ 875 0154 3A       		.uleb128 0x3a
+ 876 0155 0B       		.uleb128 0xb
+ 877 0156 3B       		.uleb128 0x3b
+ 878 0157 0B       		.uleb128 0xb
+ 879 0158 39       		.uleb128 0x39
+ 880 0159 0B       		.uleb128 0xb
+ 881 015a 11       		.uleb128 0x11
+ 882 015b 01       		.uleb128 0x1
+ 883 015c 12       		.uleb128 0x12
+GAS LISTING /tmp/cctMIvtL.s 			page 18
+
+
+ 884 015d 06       		.uleb128 0x6
+ 885 015e 40       		.uleb128 0x40
+ 886 015f 18       		.uleb128 0x18
+ 887 0160 7C       		.uleb128 0x7c
+ 888 0161 19       		.uleb128 0x19
+ 889 0162 01       		.uleb128 0x1
+ 890 0163 13       		.uleb128 0x13
+ 891 0164 00       		.byte	0
+ 892 0165 00       		.byte	0
+ 893 0166 18       		.uleb128 0x18
+ 894 0167 34       		.uleb128 0x34
+ 895 0168 00       		.byte	0
+ 896 0169 03       		.uleb128 0x3
+ 897 016a 08       		.uleb128 0x8
+ 898 016b 3A       		.uleb128 0x3a
+ 899 016c 0B       		.uleb128 0xb
+ 900 016d 3B       		.uleb128 0x3b
+ 901 016e 0B       		.uleb128 0xb
+ 902 016f 39       		.uleb128 0x39
+ 903 0170 0B       		.uleb128 0xb
+ 904 0171 49       		.uleb128 0x49
+ 905 0172 13       		.uleb128 0x13
+ 906 0173 02       		.uleb128 0x2
+ 907 0174 18       		.uleb128 0x18
+ 908 0175 00       		.byte	0
+ 909 0176 00       		.byte	0
+ 910 0177 19       		.uleb128 0x19
+ 911 0178 2E       		.uleb128 0x2e
+ 912 0179 00       		.byte	0
+ 913 017a 3F       		.uleb128 0x3f
+ 914 017b 19       		.uleb128 0x19
+ 915 017c 03       		.uleb128 0x3
+ 916 017d 0E       		.uleb128 0xe
+ 917 017e 3A       		.uleb128 0x3a
+ 918 017f 0B       		.uleb128 0xb
+ 919 0180 3B       		.uleb128 0x3b
+ 920 0181 0B       		.uleb128 0xb
+ 921 0182 39       		.uleb128 0x39
+ 922 0183 0B       		.uleb128 0xb
+ 923 0184 11       		.uleb128 0x11
+ 924 0185 01       		.uleb128 0x1
+ 925 0186 12       		.uleb128 0x12
+ 926 0187 06       		.uleb128 0x6
+ 927 0188 40       		.uleb128 0x40
+ 928 0189 18       		.uleb128 0x18
+ 929 018a 7C       		.uleb128 0x7c
+ 930 018b 19       		.uleb128 0x19
+ 931 018c 00       		.byte	0
+ 932 018d 00       		.byte	0
+ 933 018e 00       		.byte	0
+ 934              		.section	.debug_aranges,"",@progbits
+ 935 0000 1C000000 		.long	0x1c
+ 936 0004 0200     		.value	0x2
+ 937 0006 00000000 		.long	.Ldebug_info0
+ 938 000a 04       		.byte	0x4
+ 939 000b 00       		.byte	0
+ 940 000c 0000     		.value	0
+GAS LISTING /tmp/cctMIvtL.s 			page 19
+
+
+ 941 000e 0000     		.value	0
+ 942 0010 00000000 		.long	.Ltext0
+ 943 0014 58010000 		.long	.Letext0-.Ltext0
+ 944 0018 00000000 		.long	0
+ 945 001c 00000000 		.long	0
+ 946              		.section	.debug_line,"",@progbits
+ 947              	.Ldebug_line0:
+ 948 0000 AD000000 		.section	.debug_str,"MS",@progbits,1
+ 948      05000400 
+ 948      4F000000 
+ 948      010101FB 
+ 948      0E0D0001 
+ 949              	.LASF23:
+ 950 0000 5F5F7369 		.string	"__sighandler_t"
+ 950      6768616E 
+ 950      646C6572 
+ 950      5F7400
+ 951              	.LASF32:
+ 952 000f 5F6D6169 		.string	"_main"
+ 952      6E00
+ 953              	.LASF16:
+ 954 0015 635F6F66 		.string	"c_oflag"
+ 954      6C616700 
+ 955              	.LASF24:
+ 956 001d 7369676E 		.string	"signal"
+ 956      616C00
+ 957              	.LASF30:
+ 958 0024 7465726D 		.string	"termios"
+ 958      696F7300 
+ 959              	.LASF6:
+ 960 002c 73686F72 		.string	"short unsigned int"
+ 960      7420756E 
+ 960      7369676E 
+ 960      65642069 
+ 960      6E7400
+ 961              	.LASF17:
+ 962 003f 635F6366 		.string	"c_cflag"
+ 962      6C616700 
+ 963              	.LASF22:
+ 964 0047 635F6F73 		.string	"c_ospeed"
+ 964      70656564 
+ 964      00
+ 965              	.LASF27:
+ 966 0050 74636765 		.string	"tcgetattr"
+ 966      74617474 
+ 966      7200
+ 967              	.LASF28:
+ 968 005a 74637365 		.string	"tcsetattr"
+ 968      74617474 
+ 968      7200
+ 969              	.LASF36:
+ 970 0064 64697361 		.string	"disableRawMode"
+ 970      626C6552 
+ 970      61774D6F 
+ 970      646500
+ 971              	.LASF10:
+ 972 0073 6C6F6E67 		.string	"long long unsigned int"
+GAS LISTING /tmp/cctMIvtL.s 			page 20
+
+
+ 972      206C6F6E 
+ 972      6720756E 
+ 972      7369676E 
+ 972      65642069 
+ 973              	.LASF14:
+ 974 008a 7463666C 		.string	"tcflag_t"
+ 974      61675F74 
+ 974      00
+ 975              	.LASF5:
+ 976 0093 756E7369 		.string	"unsigned char"
+ 976      676E6564 
+ 976      20636861 
+ 976      7200
+ 977              	.LASF35:
+ 978 00a1 656E6162 		.string	"enableRawMode"
+ 978      6C655261 
+ 978      774D6F64 
+ 978      6500
+ 979              	.LASF21:
+ 980 00af 635F6973 		.string	"c_ispeed"
+ 980      70656564 
+ 980      00
+ 981              	.LASF7:
+ 982 00b8 6C6F6E67 		.string	"long unsigned int"
+ 982      20756E73 
+ 982      69676E65 
+ 982      6420696E 
+ 982      7400
+ 983              	.LASF18:
+ 984 00ca 635F6C66 		.string	"c_lflag"
+ 984      6C616700 
+ 985              	.LASF20:
+ 986 00d2 635F6363 		.string	"c_cc"
+ 986      00
+ 987              	.LASF33:
+ 988 00d7 6D61696E 		.string	"main"
+ 988      00
+ 989              	.LASF26:
+ 990 00dc 61746578 		.string	"atexit"
+ 990      697400
+ 991              	.LASF13:
+ 992 00e3 73706565 		.string	"speed_t"
+ 992      645F7400 
+ 993              	.LASF2:
+ 994 00eb 756E7369 		.string	"unsigned int"
+ 994      676E6564 
+ 994      20696E74 
+ 994      00
+ 995              	.LASF31:
+ 996 00f8 6F726967 		.string	"orig_termios"
+ 996      5F746572 
+ 996      6D696F73 
+ 996      00
+ 997              	.LASF29:
+ 998 0105 474E5520 		.string	"GNU C17 14.2.1 20240910 -m32 -mtune=generic -march=x86-64 -g"
+ 998      43313720 
+ 998      31342E32 
+GAS LISTING /tmp/cctMIvtL.s 			page 21
+
+
+ 998      2E312032 
+ 998      30323430 
+ 999              	.LASF15:
+ 1000 0142 635F6966 		.string	"c_iflag"
+ 1000      6C616700 
+ 1001              	.LASF34:
+ 1002 014a 68616E64 		.string	"handler"
+ 1002      6C657200 
+ 1003              	.LASF4:
+ 1004 0152 6C6F6E67 		.string	"long long int"
+ 1004      206C6F6E 
+ 1004      6720696E 
+ 1004      7400
+ 1005              	.LASF11:
+ 1006 0160 63686172 		.string	"char"
+ 1006      00
+ 1007              	.LASF19:
+ 1008 0165 635F6C69 		.string	"c_line"
+ 1008      6E6500
+ 1009              	.LASF25:
+ 1010 016c 65786974 		.string	"exit"
+ 1010      00
+ 1011              	.LASF12:
+ 1012 0171 63635F74 		.string	"cc_t"
+ 1012      00
+ 1013              	.LASF9:
+ 1014 0176 73686F72 		.string	"short int"
+ 1014      7420696E 
+ 1014      7400
+ 1015              	.LASF3:
+ 1016 0180 6C6F6E67 		.string	"long int"
+ 1016      20696E74 
+ 1016      00
+ 1017              	.LASF8:
+ 1018 0189 7369676E 		.string	"signed char"
+ 1018      65642063 
+ 1018      68617200 
+ 1019              		.section	.debug_line_str,"MS",@progbits,1
+ 1020              	.LASF1:
+ 1021 0000 2F686F6D 		.string	"/home/luca/Desktop/Uni/tools/assembler"
+ 1021      652F6C75 
+ 1021      63612F44 
+ 1021      65736B74 
+ 1021      6F702F55 
+ 1022              	.LASF0:
+ 1023 0027 2E2F6669 		.string	"./files/main.c"
+ 1023      6C65732F 
+ 1023      6D61696E 
+ 1023      2E6300
+ 1024              		.hidden	__stack_chk_fail_local
+ 1025              		.ident	"GCC: (GNU) 14.2.1 20240910"
+ 1026 0036 2F686F6D 		.section	.note.GNU-stack,"",@progbits
+ 1026      652F6C75 
+ 1026      63612F44 
+ 1026      65736B74 
+ 1026      6F702F55 
+GAS LISTING /tmp/cctMIvtL.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                            *ABS*:00000001 LINUX
+     /tmp/cctMIvtL.s:10     .bss:00000000 orig_termios
+     /tmp/cctMIvtL.s:15     .text:00000000 disableRawMode
+     /tmp/cctMIvtL.s:212    .text.__x86.get_pc_thunk.ax:00000000 __x86.get_pc_thunk.ax
+     /tmp/cctMIvtL.s:52     .text:0000002f enableRawMode
+     /tmp/cctMIvtL.s:223    .text.__x86.get_pc_thunk.bx:00000000 __x86.get_pc_thunk.bx
+     /tmp/cctMIvtL.s:132    .text:000000de handler
+     /tmp/cctMIvtL.s:163    .text:00000111 main
+
+UNDEFINED SYMBOLS
+_GLOBAL_OFFSET_TABLE_
+tcsetattr
+tcgetattr
+atexit
+__stack_chk_fail_local
+puts
+exit
+signal
+_main
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 1
+
+
+   1              	# contare il numero di occorrenze del numero nell'array, e stamparlo
+   2              	
+   3              	.include "./files/utility.s"
+   1              	#.nolist
+   2              	
+   3              	#------------------------------------------------------------------------------
+   4              	
+   5              	.ifdef DOS
+   6              	
+   7              	.TEXT
+   8              	
+   9              	inchar: 
+  10              	        PUSH %EBX
+  11              	inchar_loop:
+  12              	        MOV  %AX,%BX 
+  13              	        MOV  $0x07,%AH 
+  14              	        INT  $0x21
+  15              	        MOV  %BH,%AH
+  16              	        
+  17              	        CMP  $0x0A, %AL         # ignore LF, for input redirection with CRLF files.
+  18              	        JE   inchar_loop        # redirection with LF files is not supported
+  19              	        
+  20              	        POP  %EBX
+  21              	        RET
+  22              	
+  23              	.endif
+  24              	
+  25              	.ifdef LINUX
+  26              	
+  27              	.DATA
+  28 0000 00       	ic_tmp: .byte 0			 		
+  29              	
+  30              	.TEXT
+  31 0000 53       	inchar:  PUSH %EBX
+  32 0001 51       	         PUSH %ECX
+  33 0002 52       	         PUSH %EDX
+  34              	inchar_loop:
+  35 0003 50       	         PUSH %EAX
+  36 0004 B8030000 	         MOV $3,%EAX            # sys_read
+  36      00
+  37 0009 BB000000 	         MOV $0,%EBX            # fd of stdin
+  37      00
+  38 000e 8D0D0000 	         LEA ic_tmp,%ECX        # address of buffer
+  38      0000
+  39 0014 BA010000 	         MOV $1,%EDX            # read 1 character
+  39      00
+  40 0019 CD80     	         INT $0x80
+  41 001b 58       	         POP %EAX
+  42 001c A0000000 	         MOV ic_tmp,%AL
+  42      00
+  43              	
+  44 0021 3C0D     	         CMP $0x0D, %AL         # ignore CR, for input redirection with CRLF files
+  45 0023 74DE     	         JE inchar_loop         # redirection with LF files is supported
+  46              	
+  47 0025 3C0A     	         CMP $0x0A, %AL         # convert LF to CR, to have the same ENTER behavior as DOS
+  48 0027 7502     	         JNE inchar_next
+  49 0029 B00D     	         MOV $0x0D, %AL
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 2
+
+
+  50              	
+  51              	inchar_next:
+  52 002b 3C7F     	         CMP $0x7F, %AL         # convert delete (0x7f) to backspace (0x08)
+  53 002d 7502     	         JNE inchar_fine        # because Linus decided that the backspace key should send a delete
+  54 002f B008     	         MOV $0x08, %AL
+  55              	
+  56              	inchar_fine:
+  57 0031 5A       	         POP %EDX
+  58 0032 59       	         POP %ECX
+  59 0033 5B       	         POP %EBX
+  60 0034 C3       	         RET
+  61              	
+  62              	.endif
+  63              	
+  64              	#------------------------------------------------------------------------------
+  65              	
+  66              	.ifdef DOS
+  67              	
+  68              	.TEXT
+  69              	outchar: PUSH %EAX
+  70              	         PUSH %EDX
+  71              	         MOV $0x02,%AH
+  72              	         MOV %AL,%DL
+  73              	         INT $0x21
+  74              	         POP %EDX
+  75              	         POP %EAX
+  76              					 
+  77              	
+  78              	         RET
+  79              	         
+  80              	.endif
+  81              	
+  82              	.ifdef LINUX
+  83              	
+  84              	.DATA
+  85 0001 30       	oc_tmp: .ASCII  "0"
+  86              	
+  87              	.TEXT
+  88 0035 50       	outchar: PUSH %EAX
+  89 0036 53       	         PUSH %EBX
+  90 0037 51       	         PUSH %ECX
+  91 0038 52       	         PUSH %EDX
+  92              	
+  93 0039 A2010000 	         MOV %al,oc_tmp
+  93      00
+  94 003e B8040000 	         MOV $4,%EAX       # sys_write
+  94      00
+  95 0043 BB010000 	         MOV $1,%EBX       # fd of stdout
+  95      00
+  96 0048 8D0D0100 	         LEA oc_tmp,%ECX   # address of buffer
+  96      0000
+  97 004e BA010000 	         MOV $1,%EDX       # write 1 character
+  97      00
+  98 0053 CD80     	         INT $0x80
+  99              	
+ 100 0055 5A       	         POP %EDX
+ 101 0056 59       	         POP %ECX
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 3
+
+
+ 102 0057 5B       	         POP %EBX
+ 103 0058 58       	         POP %EAX
+ 104              	 
+ 105              	
+ 106 0059 C3       	         RET
+ 107              	
+ 108              	.endif
+ 109              	
+ 110              	//------------------------------------------------------------------------------
+ 111              	//------------------------------------------------------------------------------
+ 112              	//------------------------------------------------------------------------------
+ 113              	
+ 114              	.TEXT
+ 115 005a 53       	inbyte:  PUSH %EBX
+ 116 005b 88E7     	         MOV  %AH,%BH
+ 117 005d E8A60100 	         CALL inhexchar
+ 117      00
+ 118 0062 E8CEFFFF 	         CALL outchar
+ 118      FF
+ 119 0067 88C4     	         MOV  %AL,%AH
+ 120 0069 E89A0100 	         CALL inhexchar
+ 120      00
+ 121 006e E8C2FFFF 	         CALL outchar
+ 121      FF
+ 122 0073 E8D20100 	         CALL HA2B8
+ 122      00
+ 123 0078 88FC     	         MOV  %BH,%AH
+ 124 007a 5B       	         POP  %EBX
+ 125 007b C3       	         RET
+ 126              	//------------------------------------------------------------------------------
+ 127              	.TEXT
+ 128 007c E8D9FFFF 	inword:  CALL inbyte
+ 128      FF
+ 129 0081 88C4     	         MOV  %AL,%AH
+ 130 0083 E8D2FFFF 	         CALL inbyte
+ 130      FF
+ 131 0088 C3       	         RET
+ 132              	//------------------------------------------------------------------------------
+ 133              	.TEXT
+ 134              	inlong:
+ 135 0089 E8EEFFFF 	indword:  CALL inword
+ 135      FF
+ 136 008e C1E010   	         SHL  $16,%EAX
+ 137 0091 E8E6FFFF 	         CALL inword
+ 137      FF
+ 138 0096 C3       	         RET
+ 139              	//------------------------------------------------------------------------------
+ 140              	.TEXT
+ 141 0097 50       	outbyte: PUSH %EAX
+ 142 0098 E88D0100 	         CALL B8HA2
+ 142      00
+ 143 009d 86C4     	         XCHG %AL,%AH
+ 144 009f E891FFFF 	         CALL outchar
+ 144      FF
+ 145 00a4 86C4     	         XCHG %AL,%AH
+ 146 00a6 E88AFFFF 	         CALL outchar
+ 146      FF
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 4
+
+
+ 147 00ab 58       	         POP  %EAX
+ 148              		 
+ 149              	
+ 150 00ac C3       	         RET
+ 151              	//------------------------------------------------------------------------------
+ 152              	.TEXT
+ 153 00ad 86C4     	outword: XCHG %AL,%AH
+ 154 00af E8E3FFFF 	         CALL outbyte
+ 154      FF
+ 155 00b4 86C4     	         XCHG %AL,%AH
+ 156 00b6 E8DCFFFF 	         CALL outbyte
+ 156      FF
+ 157              		 
+ 158              	
+ 159 00bb C3       	         RET
+ 160              	//------------------------------------------------------------------------------
+ 161              	.TEXT
+ 162              	outlong:
+ 163 00bc C1C010   	outdword: ROL  $16, %EAX
+ 164 00bf E8E9FFFF 	              CALL outword
+ 164      FF
+ 165 00c4 C1C010   	              ROL  $16,%EAX
+ 166 00c7 E8E1FFFF 	              CALL outword
+ 166      FF
+ 167              	 
+ 168              	
+ 169 00cc C3       	              RET
+ 170              	
+ 171              	//------------------------------------------------------------------------------//-----------------
+ 172              	.TEXT
+ 173 00cd 50       	newline: PUSH  %EAX
+ 174 00ce B00D     	         MOV   $0x0D,%AL
+ 175 00d0 E860FFFF 	         CALL  outchar
+ 175      FF
+ 176 00d5 B00A     	         MOV   $0x0A,%AL
+ 177 00d7 E859FFFF 	         CALL  outchar
+ 177      FF
+ 178 00dc 58       	         POP   %EAX
+ 179 00dd C3       	         RET
+ 180              	#------------------------------------------------------------------------------
+ 181              	.DATA
+ 182 0002 43686563 	L247513: .ASCII  "Checkpoint number "
+ 182      6B706F69 
+ 182      6E74206E 
+ 182      756D6265 
+ 182      7220
+ 183 0014 782E2050 	L247003: .ASCII  "x. Press any key to continue"
+ 183      72657373 
+ 183      20616E79 
+ 183      206B6579 
+ 183      20746F20 
+ 184 0030 00000000 	L247893: .FILL 1,4
+ 185              	
+ 186              	.TEXT
+ 187 00de 90       	pause :  NOP
+ 188 00df C6051400 	pause0:  MOVB $0x30,L247003
+ 188      000030
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 5
+
+
+ 189 00e6 EB51     	         JMP L271893     
+ 190 00e8 C6051400 	pause1:  MOVB $0x31,L247003
+ 190      000031
+ 191 00ef EB48     	         JMP L271893     
+ 192 00f1 C6051400 	pause2:  MOVB $0x32,L247003
+ 192      000032
+ 193 00f8 EB3F     	         JMP L271893     
+ 194 00fa C6051400 	pause3:  MOVB $0x33,L247003
+ 194      000033
+ 195 0101 EB36     	         JMP L271893     
+ 196 0103 C6051400 	pause4:  MOVB $0x34,L247003
+ 196      000034
+ 197 010a EB2D     	         JMP L271893     
+ 198 010c C6051400 	pause5:  MOVB $0x35,L247003
+ 198      000035
+ 199 0113 EB24     	         JMP L271893     
+ 200 0115 C6051400 	pause6:  MOVB $0x36,L247003
+ 200      000036
+ 201 011c EB1B     	         JMP L271893
+ 202 011e C6051400 	pause7:  MOVB $0x37,L247003
+ 202      000037
+ 203 0125 EB12     	         JMP L271893     
+ 204 0127 C6051400 	pause8:  MOVB $0x38,L247003
+ 204      000038
+ 205 012e EB09     	         JMP L271893     
+ 206 0130 C6051400 	pause9:  MOVB $0x39,L247003
+ 206      000039
+ 207 0137 EB00     	         JMP L271893     
+ 208 0139 50       	L271893: PUSH %EAX
+ 209 013a 51       	         PUSH %ECX  
+ 210 013b 56       	         PUSH %ESI
+ 211 013c E88CFFFF 	         CALL newline
+ 211      FF
+ 212 0141 BE020000 	         MOV  $L247513,%ESI
+ 212      00
+ 213 0146 66B92E00 	         MOV  $(L247893-L247513),%CX
+ 214 014a 8A06     	L247527: MOV  (%ESI),%AL
+ 215 014c E8E4FEFF 	         CALL outchar
+ 215      FF
+ 216 0151 46       	         INC  %ESI
+ 217 0152 6649     	         DEC  %CX
+ 218 0154 75F4     	         JNZ  L247527
+ 219 0156 E872FFFF 	         CALL newline
+ 219      FF
+ 220 015b E8A0FEFF 	         CALL inchar
+ 220      FF
+ 221 0160 5E       	         POP  %ESI
+ 222 0161 59       	         POP  %ECX
+ 223 0162 58       	         POP  %EAX
+ 224 0163 C3       	         RET
+ 225              	
+ 226              	#---------------------------------------------------------------------------
+ 227              	.TEXT
+ 228 0164 6683F902 	inline:  CMP     $2,%CX
+ 229 0168 7262     	         JB      L409ABB  # salta a fine
+ 230 016a 6683F950 	         CMP     $80,%CX
+ 231 016e 775C     	         JA      L409ABB  # salta a fine
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 6
+
+
+ 232              	
+ 233 0170 50       	         PUSH    %EAX
+ 234 0171 53       	         PUSH    %EBX
+ 235 0172 51       	         PUSH    %ECX
+ 236 0173 52       	         PUSH    %EDX
+ 237              	
+ 238 0174 6689CA   	         MOV     %CX, %DX   # salva numero caratteri iniziale
+ 239              	             
+ 240 0177 6683F902 	L4004C:  CMP     $2, %CX      #ciclo
+ 241 017b 7438     	         JE      L40093       #salta a quasi fine
+ 242 017d E87EFEFF 	         CALL    inchar    
+ 242      FF
+ 243 0182 3C0D     	         CMP     $0x0D,%AL
+ 244 0184 742F     	         JE      L40093      # salta a quasi fine 
+ 245              	            
+ 246 0186 3C08     	         CMP     $0x08,%AL   
+ 247 0188 740C     	         JE      L67193      #salta a elimina carattere
+ 248              	             
+ 249 018a E8A6FEFF 	L50193:  CALL    outchar
+ 249      FF
+ 250 018f 8803     	         MOV     %AL,(%EBX)
+ 251 0191 43       	         INC     %EBX
+ 252 0192 6649     	         DEC     %CX
+ 253 0194 EBE1     	         JMP     L4004C      #torna in ciclo
+ 254              	
+ 255              	#elimina carattere
+ 256 0196 6639CA   	L67193:  CMP     %CX, %DX    #impedisce di cancellare oltre l'inizio del buffer
+ 257 0199 74DC     	         JE      L4004C      
+ 258 019b 4B       	         DEC     %EBX        
+ 259 019c 6641     	         INC     %CX
+ 260 019e B008     	         MOV     $0x08, %AL
+ 261 01a0 E890FEFF 	         CALL    outchar
+ 261      FF
+ 262 01a5 B020     	         MOV     $0x20, %AL
+ 263 01a7 E889FEFF 	         CALL    outchar 
+ 263      FF
+ 264 01ac B008     	         MOV     $0x08, %AL
+ 265 01ae E882FEFF 	         CALL    outchar
+ 265      FF
+ 266 01b3 EBC2     	         JMP     L4004C
+ 267              	                 
+ 268 01b5 B00D     	L40093:  MOV     $0x0D,%AL   #quasi fine
+ 269 01b7 E879FEFF 	         CALL    outchar
+ 269      FF
+ 270 01bc 8803     	         MOV     %AL,(%EBX)
+ 271 01be 43       	         INC     %EBX
+ 272 01bf B00A     	         MOV     $0x0A,%AL
+ 273 01c1 E86FFEFF 	         CALL    outchar
+ 273      FF
+ 274 01c6 8803     	         MOV     %AL,(%EBX)
+ 275 01c8 5A       	         POP     %EDX
+ 276 01c9 59       	         POP     %ECX
+ 277 01ca 5B       	         POP     %EBX
+ 278 01cb 58       	         POP     %EAX
+ 279 01cc C3       	L409ABB: RET
+ 280              	#------------------------------------------------------------------------------
+ 281              	
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 7
+
+
+ 282              	.TEXT
+ 283 01cd 50       	outline: PUSH %EAX
+ 284 01ce 53       	         PUSH %EBX
+ 285 01cf 51       	         PUSH %ECX
+ 286 01d0 66B95000 	         MOV $80,%CX
+ 287 01d4 8A03     	L4001B:  MOV  (%EBX),%AL
+ 288 01d6 3C0D     	         CMP  $0x0D,%AL
+ 289 01d8 740C     	         JZ   L4002A
+ 290 01da 6649     	         DEC %CX
+ 291 01dc 7408     	         JZ   L4002A
+ 292 01de E852FEFF 	         CALL outchar
+ 292      FF
+ 293 01e3 43       	         INC  %EBX
+ 294 01e4 EBEE     	         JMP  L4001B
+ 295 01e6 E8E2FEFF 	L4002A:  CALL newline
+ 295      FF
+ 296 01eb 59       			 POP  %ECX
+ 297 01ec 5B       	         POP  %EBX
+ 298 01ed 58       	         POP  %EAX
+ 299 01ee C3       	         RET
+ 300              	#------------------------------------------------------------------------------
+ 301              	
+ 302              	.TEXT
+ 303 01ef 50       	outmess:   PUSH   %EAX
+ 304 01f0 53       		   PUSH   %EBX
+ 305 01f1 51       		   PUSH   %ECX
+ 306 01f2 6683F900 	L087509:   CMP    $0,%CX
+ 307 01f6 740C     		   JE     L087508
+ 308 01f8 8A03     		   MOV    (%EBX),%AL
+ 309 01fa E836FEFF 		   CALL   outchar
+ 309      FF
+ 310 01ff 43       		   INC    %EBX
+ 311 0200 6649     		   DEC    %CX
+ 312 0202 EBEE     		   JMP    L087509
+ 313 0204 59       	L087508:   POP    %ECX
+ 314 0205 5B       		   POP    %EBX
+ 315 0206 58       		   POP    %EAX
+ 316 0207 C3       		   RET
+ 317              	#------------------------------------------------------------------------------
+ 318              	
+ 319              	.TEXT
+ 320 0208 E8F3FDFF 	inhexchar: CALL  inchar
+ 320      FF
+ 321 020d 3C30     	            CMP   $'0',%AL
+ 322 020f 72F7     	            JB    inhexchar
+ 323 0211 3C46     	            CMP   $'F',%AL
+ 324 0213 77F3     	            JA    inhexchar
+ 325 0215 3C39     	            CMP   $'9',%AL
+ 326 0217 7604     	            JBE   L3A89B3
+ 327 0219 3C41     	            CMP   $'A',%AL
+ 328 021b 72EB     	            JB    inhexchar
+ 329 021d C3       	L3A89B3:    RET
+ 330              	#------------------------------------------------------------------------------
+ 331              	.TEXT
+ 332 021e 240F     	B4HA1:    AND    $0x0F,%AL
+ 333 0220 3C09     	          CMP    $9,%AL
+ 334 0222 7703     	          JA     L3ACD37
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 8
+
+
+ 335 0224 0430     	L3ACD30:  ADD    $0x30,%AL
+ 336 0226 C3       	          RET
+ 337 0227 0437     	L3ACD37: ADD    $0x37,%AL
+ 338 0229 C3       	          RET
+ 339              	#------------------------------------------------------------------------------
+ 340              	.TEXT
+ 341 022a 51       	B8HA2: PUSH    %ECX
+ 342 022b 88C5     	       MOV     %AL,%CH
+ 343 022d C0E804   	       SHR     $4,%AL
+ 344 0230 E8E9FFFF 	       CALL    B4HA1
+ 344      FF
+ 345 0235 88C4     	       MOV     %AL,%AH
+ 346 0237 88E8     	       MOV     %CH,%AL
+ 347 0239 E8E0FFFF 	       CALL    B4HA1
+ 347      FF
+ 348 023e 59       	       POP     %ECX
+ 349 023f C3       	       RET
+ 350              	#------------------------------------------------------------------------------
+ 351 0240 3C39     	HA1B4:    CMP     $'9',%AL
+ 352 0242 7703     	          JA      L3KCD37
+ 353 0244 2C30     	sub_0x30: SUB     $0x30,%AL
+ 354 0246 C3       	          RET
+ 355 0247 2C37     	L3KCD37:  SUB     $0x37,%AL
+ 356 0249 C3       	          RET
+ 357              	#------------------------------------------------------------------------------
+ 358              	.TEXT
+ 359 024a 51       	HA2B8:   PUSH  %ECX
+ 360 024b 88C5     	         MOV   %AL,%CH
+ 361 024d 88E0     	         MOV   %AH,%AL
+ 362 024f E8ECFFFF 	         CALL  HA1B4
+ 362      FF
+ 363 0254 88C4     	         MOV   %AL,%AH
+ 364 0256 C0C404   	         ROL   $4,%AH 
+ 365 0259 88E8     	         MOV   %CH,%AL
+ 366 025b E8E0FFFF 	         CALL  HA1B4
+ 366      FF
+ 367 0260 08E0     	         OR    %AH,%AL 
+ 368 0262 59       	         POP   %ECX
+ 369 0263 C3       	         RET
+ 370              	#------------------------------------------------------------------------------
+ 371              	outdecimal_byte:
+ 372 0264 50       	outdecimal_tiny:  PUSH %EAX  
+ 373 0265 25FF0000 	                  AND  $0x000000FF,%EAX 
+ 373      00
+ 374 026a E80F0000 	                  CALL outdecimal_long 
+ 374      00
+ 375 026f 58       	                  POP  %EAX 
+ 376 0270 C3       	                  RET 
+ 377              	#------------------------------------------------------------------------------
+ 378              	outdecimal_word:
+ 379 0271 50       	outdecimal_short:  PUSH %EAX  
+ 380 0272 25FFFF00 	                  AND  $0x0000FFFF,%EAX 
+ 380      00
+ 381 0277 E8020000 	                  CALL outdecimal_long 
+ 381      00
+ 382 027c 58       	                  POP  %EAX 
+ 383 027d C3       	                  RET 
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 9
+
+
+ 384              	#-----------------------------------------------------------
+ 385              	.DATA
+ 386 0034 00000000 	resti_cifre:      .fill 11,1
+ 386      00000000 
+ 386      000000
+ 387              	
+ 388              	.TEXT
+ 389 027e 50       	outdecimal_long:  PUSH  %EAX
+ 390 027f 53       		  PUSH  %EBX
+ 391 0280 51       	                  PUSH  %ECX
+ 392 0281 52       	                  PUSH  %EDX
+ 393 0282 56       	                  PUSH  %ESI
+ 394 0283 57       	                  PUSH  %EDI
+ 395 0284 55       		PUSH  %EBP
+ 396              	
+ 397 0285 B90A0000 	                  MOV   $10,%ECX
+ 397      00
+ 398 028a 3DFFC99A 	                  CMP   $999999999,%EAX
+ 398      3B
+ 399 028f 773D     	                  JA    long_L4013K
+ 400 0291 49       	                  DEC   %ECX
+ 401 0292 3DFFE0F5 	                  CMP   $99999999,%EAX
+ 401      05
+ 402 0297 7735     	                  JA    long_L4013K
+ 403 0299 49       	                  DEC   %ECX
+ 404 029a 3D7F9698 	                  CMP   $9999999,%EAX
+ 404      00
+ 405 029f 772D     	                  JA    long_L4013K
+ 406 02a1 49       	                  DEC   %ECX
+ 407 02a2 3D3F420F 	                  CMP   $999999,%EAX
+ 407      00
+ 408 02a7 7725     	                  JA    long_L4013K
+ 409 02a9 49       	                  DEC   %ECX
+ 410 02aa 3D9F8601 	                  CMP   $99999,%EAX
+ 410      00
+ 411 02af 771D     	                  JA    long_L4013K
+ 412 02b1 49       	                  DEC   %ECX
+ 413 02b2 3D0F2700 	                  CMP   $9999,%EAX
+ 413      00
+ 414 02b7 7715     	                  JA    long_L4013K
+ 415 02b9 49       	                  DEC   %ECX
+ 416 02ba 3DE70300 	                  CMP   $999,%EAX
+ 416      00
+ 417 02bf 770D     	                  JA    long_L4013K
+ 418 02c1 49       	                  DEC   %ECX
+ 419 02c2 83F863   	                  CMP   $99,%EAX
+ 420 02c5 7707     	                  JA    long_L4013K
+ 421 02c7 49       	                  DEC   %ECX
+ 422 02c8 83F809   	                  CMP   $9,%EAX
+ 423 02cb 7701     	                  JA    long_L4013K
+ 424 02cd 49       	                  DEC   %ECX
+ 425              	
+ 426 02ce 8D3D3400 	long_L4013K:      LEA   resti_cifre,%EDI
+ 426      0000
+ 427 02d4 89CD     	                  MOV   %ECX, %EBP
+ 428 02d6 01CF     	                  ADD   %ECX,%EDI      # EDI punta sotto alla cifra da inserire per prima
+ 429 02d8 4F       	                  DEC   %EDI           # EDI torna a puntare alla prima cifra da inserire
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 10
+
+
+ 430 02d9 BA000000 	ciclolongL4013K:  MOV   $0,%EDX        # costruzione del dividendo EDX:EAX
+ 430      00
+ 431 02de BE0A0000 	                  MOV   $10,%ESI       # divisore in ESI
+ 431      00
+ 432 02e3 F7F6     	                  DIVL  %ESI   
+ 433 02e5 83E20F   	                  AND   $0x0000000F,%EDX # sistemazione del resto_cifra codificato ASCII
+ 434 02e8 80C230   	                  ADD   $0x30,%DL
+ 435 02eb 8817     	                  MOV   %DL,(%EDI) 
+ 436              	
+ 437 02ed 4F       	                  DEC   %EDI   
+ 438 02ee 49       	                  DEC   %ECX
+ 439 02ef 83F900   	                  CMP   $0,%ECX        # Controllo fine ciclo
+ 440 02f2 75E5     	                  JNE   ciclolongL4013K
+ 441              	
+ 442 02f4 8D1D3400 	                  LEA   resti_cifre,%EBX
+ 442      0000
+ 443 02fa 89E9     					  MOV   %EBP, %ECX
+ 444 02fc E8EEFEFF 	                  CALL  outmess  
+ 444      FF
+ 445              	
+ 446 0301 5D       					  POP   %EBP
+ 447 0302 5F       					  POP   %EDI
+ 448 0303 5E       	                  POP   %ESI
+ 449 0304 5A       	                  POP   %EDX
+ 450 0305 59       	                  POP   %ECX
+ 451 0306 5B       					  POP   %EBX
+ 452 0307 58       	                  POP   %EAX
+ 453 0308 C3       	                  RET
+ 454              	#------------------------------------------------------------------------------
+ 455              	
+ 456              	.TEXT
+ 457              	indecimal_byte:
+ 458 0309 C6054300 	indecimal_tiny:   MOVB  $3,num_cifre_1eWK7
+ 458      000003
+ 459 0310 53       	                  PUSH %EBX
+ 460 0311 50       	                  PUSH %EAX
+ 461 0312 E82B0000 	                  CALL converti_1eWK6
+ 461      00
+ 462 0317 88C3     	                  MOV  %AL,%BL
+ 463 0319 58       	                  POP  %EAX
+ 464 031a 88D8     	                  MOV  %BL,%AL
+ 465 031c 5B       	                  POP  %EBX
+ 466 031d C3       	                  RET
+ 467              	
+ 468              	indecimal_word:
+ 469 031e C6054300 	indecimal_short:   MOVB  $5,num_cifre_1eWK7
+ 469      000005
+ 470 0325 53       	                  PUSH %EBX
+ 471 0326 50       	                  PUSH %EAX
+ 472 0327 E8160000 	                  CALL converti_1eWK6
+ 472      00
+ 473 032c 6689C3   	                  MOV  %AX,%BX
+ 474 032f 58       	                  POP  %EAX
+ 475 0330 6689D8   	                  MOV  %BX,%AX
+ 476 0333 5B       	                  POP  %EBX
+ 477 0334 C3       	                  RET
+ 478              	
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 11
+
+
+ 479 0335 C6054300 	indecimal_long:   MOVB  $10,num_cifre_1eWK7
+ 479      00000A
+ 480 033c E8010000 	                  CALL  converti_1eWK6
+ 480      00
+ 481 0341 C3       	                  RET
+ 482              	
+ 483              	#------------------------------------------------------------------------------
+ 484              	# Converta da decimale a binario in EAX
+ 485              	
+ 486              	.DATA
+ 487 003f 00000000 	prodotti_parziali_1eWK7:   .fill 1,4
+ 488 0043 00       	num_cifre_1eWK7:            .fill 1,1
+ 489              	
+ 490              	.TEXT   
+ 491 0342 90       	converti_1eWK6:    NOP
+ 492 0343 52       		    PUSH %EDX
+ 493 0344 C7053F00 	P_di_0_1eWK7:    MOVL  $0, prodotti_parziali_1eWK7
+ 493      00000000 
+ 493      0000
+ 494              	                 
+ 495 034e 803D4300 	ciclo_1eWK7:  CMPB  $0x00,num_cifre_1eWK7     # termina se cifre finite
+ 495      000000
+ 496 0355 7439     	                      JE    fine_1eWK7
+ 497 0357 E8A4FCFF 	new_cifra_1eWK7:   CALL  inchar                    # prelievo eventuale nuova cifra
+ 497      FF
+ 498 035c 3C0D     	                      CMP   $0x0D,%AL                 # termina se ritorno carrello
+ 499 035e 7430     	                      JE    fine_1eWK7 
+ 500              	                   
+ 501 0360 3C30     	                      CMP   $'0',%AL                  # scarta cifre non decimali
+ 502 0362 72F3     	                      JB    new_cifra_1eWK7
+ 503 0364 3C39     	                      CMP   $'9',%AL
+ 504 0366 77EF     	                      JA    new_cifra_1eWK7
+ 505 0368 E8C8FCFF 	                      CALL  outchar
+ 505      FF
+ 506              	
+ 507 036d 50       	                      PUSH  %EAX                      # nuovo prodotto parziale
+ 508 036e B80A0000 	                      MOV   $10,%EAX
+ 508      00
+ 509 0373 F7253F00 	                      MULL  prodotti_parziali_1eWK7    
+ 509      0000
+ 510 0379 A33F0000 	                      MOV   %EAX,prodotti_parziali_1eWK7
+ 510      00
+ 511 037e 58       	                      POP   %EAX          
+ 512 037f 83E00F   	                      AND   $0x0000000F,%EAX
+ 513 0382 01053F00 	                      ADDL  %EAX, prodotti_parziali_1eWK7
+ 513      0000
+ 514              	
+ 515 0388 FE0D4300 	                      DECB  num_cifre_1eWK7                  
+ 515      0000
+ 516 038e 75BE     	                      JNE   ciclo_1eWK7                        
+ 517              	                  
+ 518 0390 A13F0000 	fine_1eWK7:           MOV   prodotti_parziali_1eWK7,%EAX 
+ 518      00
+ 519 0395 5A       	                      POP %EDX
+ 520 0396 C3       	                      RET
+ 521              	#-------------------------------------------------------------------------
+ 522              	.DATA
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 12
+
+
+ 523 0044 0A0D0A0D 	LZ647513: .BYTE   0x0A,0x0D,0x0A,0x0D
+ 524 0048 50726573 	          .ASCII  "Press Q to exit . . . "
+ 524      73205120 
+ 524      746F2065 
+ 524      78697420 
+ 524      2E202E20 
+ 525              	LZ567893: .BYTE
+ 526              	
+ 527              	.TEXT
+ 528 0397 BE440000 	exit:          MOV  $LZ647513,%ESI
+ 528      00
+ 529 039c 66B91A00 	               MOV  $(LZ567893-LZ647513),%CX
+ 530 03a0 8A06     	LZ247AA7:      MOV  (%ESI),%AL
+ 531 03a2 E88EFCFF 	               CALL outchar
+ 531      FF
+ 532 03a7 46       	               INC  %ESI
+ 533 03a8 6649     	               DEC  %CX
+ 534 03aa 75F4     	               JNZ  LZ247AA7
+ 535 03ac E84FFCFF 	waitQ_LZc247A: CALL inchar
+ 535      FF
+ 536 03b1 3C51     	               CMP  $'Q',%AL
+ 537 03b3 75F7     	               JNE  waitQ_LZc247A
+ 538              	
+ 539              	.ifdef DOS
+ 540              	               MOV $0x4C,%AH
+ 541              	               INT $0x21
+ 542              	.endif
+ 543              	
+ 544              	.ifdef LINUX    
+ 545 03b5 66B80100 	               MOV $0x0001,%AX
+ 546 03b9 CD80     	               INT $0x80
+ 547              	.endif
+ 548              	
+ 549              	#----------------------------------------------------------------------------- 
+ 550              	
+ 551              	.global _main
+   4              	
+   5              	.data
+   6 005e 01000001 	array:      .word 1, 256, 256, 512, 42, 2048, 1024, 1, 0
+   6      00010002 
+   6      2A000008 
+   6      00040100 
+   6      0000
+   7 0070 09000000 	array_len:  .long 9
+   8 0074 0100     	numero:     .word 1
+   9              	
+  10              	.text
+  11              	_main:
+  12 03bb 90       		nop
+  13              	
+  14              	.primo: # inizializza i registri
+  15 03bc BE000000 		mov $0, %esi
+  15      00
+  16 03c1 668B1D74 		mov numero, %bx
+  16      000000
+  17 03c8 B100     		mov $0, %cl
+  18              	
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 13
+
+
+  19              	loop: # cicla sull'array
+  20 03ca 39357000 		cmp %esi, array_len
+  20      0000
+  21 03d0 740F     		je dopo
+  22              		
+  23 03d2 66391C75 		cmp %bx, array(,%esi,2)
+  23      5E000000 
+  24 03da 7502     		jne step
+  25              	
+  26 03dc FEC1     		inc %cl
+  27              	
+  28              	step: # prossimo passo iterativo
+  29 03de 46       		inc %esi
+  30 03df EBE9     		jmp loop
+  31              	
+  32              	dopo: # esegui dopo il loop, stampa
+  33 03e1 88C8     		mov %cl, %al
+  34 03e3 E8AFFCFF 		call outbyte
+  34      FF
+  35 03e8 E8E0FCFF 		call newline
+  35      FF
+  36              	
+  37 03ed C3       		ret
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000001 LINUX
+   ./files/utility.s:28     .data:00000000 ic_tmp
+   ./files/utility.s:31     .text:00000000 inchar
+   ./files/utility.s:34     .text:00000003 inchar_loop
+   ./files/utility.s:51     .text:0000002b inchar_next
+   ./files/utility.s:56     .text:00000031 inchar_fine
+   ./files/utility.s:85     .data:00000001 oc_tmp
+   ./files/utility.s:88     .text:00000035 outchar
+   ./files/utility.s:115    .text:0000005a inbyte
+   ./files/utility.s:320    .text:00000208 inhexchar
+   ./files/utility.s:359    .text:0000024a HA2B8
+   ./files/utility.s:128    .text:0000007c inword
+   ./files/utility.s:134    .text:00000089 inlong
+   ./files/utility.s:135    .text:00000089 indword
+   ./files/utility.s:141    .text:00000097 outbyte
+   ./files/utility.s:341    .text:0000022a B8HA2
+   ./files/utility.s:153    .text:000000ad outword
+   ./files/utility.s:162    .text:000000bc outlong
+   ./files/utility.s:163    .text:000000bc outdword
+   ./files/utility.s:173    .text:000000cd newline
+   ./files/utility.s:182    .data:00000002 L247513
+   ./files/utility.s:183    .data:00000014 L247003
+   ./files/utility.s:184    .data:00000030 L247893
+   ./files/utility.s:187    .text:000000de pause
+   ./files/utility.s:188    .text:000000df pause0
+   ./files/utility.s:208    .text:00000139 L271893
+   ./files/utility.s:190    .text:000000e8 pause1
+   ./files/utility.s:192    .text:000000f1 pause2
+   ./files/utility.s:194    .text:000000fa pause3
+   ./files/utility.s:196    .text:00000103 pause4
+   ./files/utility.s:198    .text:0000010c pause5
+   ./files/utility.s:200    .text:00000115 pause6
+   ./files/utility.s:202    .text:0000011e pause7
+   ./files/utility.s:204    .text:00000127 pause8
+   ./files/utility.s:206    .text:00000130 pause9
+   ./files/utility.s:214    .text:0000014a L247527
+   ./files/utility.s:228    .text:00000164 inline
+   ./files/utility.s:279    .text:000001cc L409ABB
+   ./files/utility.s:240    .text:00000177 L4004C
+   ./files/utility.s:268    .text:000001b5 L40093
+   ./files/utility.s:256    .text:00000196 L67193
+   ./files/utility.s:249    .text:0000018a L50193
+   ./files/utility.s:283    .text:000001cd outline
+   ./files/utility.s:287    .text:000001d4 L4001B
+   ./files/utility.s:295    .text:000001e6 L4002A
+   ./files/utility.s:303    .text:000001ef outmess
+   ./files/utility.s:306    .text:000001f2 L087509
+   ./files/utility.s:313    .text:00000204 L087508
+   ./files/utility.s:329    .text:0000021d L3A89B3
+   ./files/utility.s:332    .text:0000021e B4HA1
+   ./files/utility.s:337    .text:00000227 L3ACD37
+   ./files/utility.s:335    .text:00000224 L3ACD30
+   ./files/utility.s:351    .text:00000240 HA1B4
+   ./files/utility.s:355    .text:00000247 L3KCD37
+   ./files/utility.s:353    .text:00000244 sub_0x30
+   ./files/utility.s:371    .text:00000264 outdecimal_byte
+GAS LISTING /home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s 			page 15
+
+
+   ./files/utility.s:372    .text:00000264 outdecimal_tiny
+   ./files/utility.s:389    .text:0000027e outdecimal_long
+   ./files/utility.s:378    .text:00000271 outdecimal_word
+   ./files/utility.s:379    .text:00000271 outdecimal_short
+   ./files/utility.s:386    .data:00000034 resti_cifre
+   ./files/utility.s:426    .text:000002ce long_L4013K
+   ./files/utility.s:430    .text:000002d9 ciclolongL4013K
+   ./files/utility.s:457    .text:00000309 indecimal_byte
+   ./files/utility.s:458    .text:00000309 indecimal_tiny
+   ./files/utility.s:488    .data:00000043 num_cifre_1eWK7
+   ./files/utility.s:491    .text:00000342 converti_1eWK6
+   ./files/utility.s:468    .text:0000031e indecimal_word
+   ./files/utility.s:469    .text:0000031e indecimal_short
+   ./files/utility.s:479    .text:00000335 indecimal_long
+   ./files/utility.s:487    .data:0000003f prodotti_parziali_1eWK7
+   ./files/utility.s:493    .text:00000344 P_di_0_1eWK7
+   ./files/utility.s:495    .text:0000034e ciclo_1eWK7
+   ./files/utility.s:518    .text:00000390 fine_1eWK7
+   ./files/utility.s:497    .text:00000357 new_cifra_1eWK7
+   ./files/utility.s:523    .data:00000044 LZ647513
+   ./files/utility.s:525    .data:0000005e LZ567893
+   ./files/utility.s:528    .text:00000397 exit
+   ./files/utility.s:530    .text:000003a0 LZ247AA7
+   ./files/utility.s:535    .text:000003ac waitQ_LZc247A
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:11     .text:000003bb _main
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:6      .data:0000005e array
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:7      .data:00000070 array_len
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:8      .data:00000074 numero
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:14     .text:000003bc .primo
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:19     .text:000003ca loop
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:32     .text:000003e1 dopo
+/home/luca/Desktop/Uni/tools/assembler/lezioni/2/conta_num.s:28     .text:000003de step
+
+NO UNDEFINED SYMBOLS
