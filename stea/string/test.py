@@ -7,8 +7,12 @@ import time
 import random
 import string
 
+asm = ["./asm/string_s"]
+c = ["./c/string"]
+tests = 100
 max_len = 80
-chars = string.ascii_letters + string.digits + ' '
+chars = string.ascii_letters + string.digits
+charspace = chars + ' '
 
 
 def read_output(pipe, output_queue):
@@ -35,12 +39,14 @@ def run_process(command, query, timeout):
                                                                output_queue))
     output_thread.start()
 
+    out = ""
+
     start_time = time.time()
     while time.time() - start_time < timeout:
         try:
             line = output_queue.get(timeout=0.01)
             if line:
-                print(line.strip())
+                out += line
         except queue.Empty:
             pass
 
@@ -53,8 +59,6 @@ def run_process(command, query, timeout):
 
     output_thread.join()
     output, errors = process.communicate()
-    if output:
-        print(output.strip())
     if errors:
         print("Errors:", errors.strip())
 
@@ -62,7 +66,7 @@ def run_process(command, query, timeout):
     process.stdout.close()
     process.stderr.close()
 
-    return output.strip()
+    return out
 
 
 def ran_char():
@@ -70,11 +74,11 @@ def ran_char():
 
 
 def ran_string():
-    len = random.randrange(0, max_len)
-    str = ""
+    len = random.randrange(0, max_len - 1)
+    str = ran_char()
 
     for i in range(0, len):
-        str += ran_char()
+        str += random.choice(charspace)
 
     return str
 
@@ -104,17 +108,24 @@ def gen_test():
 
 
 if __name__ == "__main__":
-    asm = ["./asm/string"]
-    c = ["./c/string"]
+    for i in range(1, tests + 1):
+        test = gen_test()
 
-    test = gen_test()
+        asm_out = run_process(asm, test, 0.01)
+        c_out = run_process(c, test, 0.01)
 
-    print("==== ASSEMBLY ====")
-    asm_out = run_process(asm, test, 0.1)
-    print("\n======= C ========")
-    c_out = run_process(c, test, 0.1)
+        print(f"==== TEST {i} ====")
 
-    if asm_out == c_out:
-        print("\n=> PASSED")
-    else:
-        print("\n=> FAILED")
+        print("==== ASSEMBLY ====")
+        print(asm_out)
+
+        print("\n======= C ========")
+        print(c_out)
+
+        if asm_out == c_out:
+            print("\n=> PASSED\n\n\n")
+        else:
+            print("\n=> FAILED\n")
+            print("Faulty input was:")
+            print(test)
+            print("\n")

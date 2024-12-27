@@ -1,0 +1,1326 @@
+==== TEST 1 ====
+==== ASSEMBLY ====
+=> prova strlen
+28
+=> prova strcpy 1
+89Fe7vEpL
+ho
+=> prova strcpy 2
+vpoeiEz4KtjOdMHQEB9yZPF5qazzPMgo8NKqhHZYMcBWFybv v9HAAC0wlfLgwKRHImUAox1qk4hJP0
+KtjOdMHQEB9yZPF5qazzPMgo8NKqhHZYMcBWFybv v9HAAC0wlfLgwKRHImUAox1qk4hJP0
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+28
+=> prova strcpy 1
+89Fe7vEpL
+ho
+=> prova strcpy 2
+vpoeiEz4KtjOdMHQEB9yZPF5qazzPMgo8NKqhHZYMcBWFybv v9HAAC0wlfLgwKRHImUAox1qk4hJP0
+KtjOdMHQEB9yZPF5qazzPMgo8NKqhHZYMcBWFybv v9HAAC0wlfLgwKRHImUAox1qk4hJP0
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 2 ====
+==== ASSEMBLY ====
+=> prova strlen
+68
+=> prova strcpy 1
+iSWtV0KVXUk0rxj6pKhgvY2aJUgDwbkv9x c6XcnJrwREYbm5yQwX1Vjr3p7
+mthbVPKxiSWtV0KVXUk0rxj6pKhgvY2aJUgDwbkv9x c6XcnJrwREYbm5yQwX1Vjr3p7
+=> prova strcpy 2
+0X6zPHW4oFGxsuHPSAAVeg 1AwkJrt7
+oFGxsuHPSAAVeg 1AwkJrt7
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+68
+=> prova strcpy 1
+iSWtV0KVXUk0rxj6pKhgvY2aJUgDwbkv9x c6XcnJrwREYbm5yQwX1Vjr3p7
+mthbVPKxiSWtV0KVXUk0rxj6pKhgvY2aJUgDwbkv9x c6XcnJrwREYbm5yQwX1Vjr3p7
+=> prova strcpy 2
+0X6zPHW4oFGxsuHPSAAVeg 1AwkJrt7
+oFGxsuHPSAAVeg 1AwkJrt7
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 3 ====
+==== ASSEMBLY ====
+=> prova strlen
+70
+=> prova strcpy 1
+Q2lFYuLDYMN50mPehek
+dpeJ
+=> prova strcpy 2
+GNxOywMqqBRarNrzEtiKT4T
+qBRarNrzEtiKT4T
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+70
+=> prova strcpy 1
+Q2lFYuLDYMN50mPehek
+dpeJ
+=> prova strcpy 2
+GNxOywMqqBRarNrzEtiKT4T
+qBRarNrzEtiKT4T
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 4 ====
+==== ASSEMBLY ====
+=> prova strlen
+44
+=> prova strcpy 1
+AvdprDFebJw0Llb3wyVvlyEUiMjqoOR2TuepfM4WFzq w
+D69
+=> prova strcpy 2
+nt
+bJw0Llb3wyVvlyEUiMjqoOR2TuepfM4WFzq w
+=> prova strcmp
+-1
+=> prova strchr
+35
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+44
+=> prova strcpy 1
+AvdprDFebJw0Llb3wyVvlyEUiMjqoOR2TuepfM4WFzq w
+D69
+=> prova strcpy 2
+nt
+bJw0Llb3wyVvlyEUiMjqoOR2TuepfM4WFzq w
+=> prova strcmp
+-1
+=> prova strchr
+35
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 5 ====
+==== ASSEMBLY ====
+=> prova strlen
+65
+=> prova strcpy 1
+qEMkCEIYZRmDmpRhd4ye UZQhmC1SXxaJ22Y7l2nG4oPJeoTH
+87F9C0i9qEMkCEIYZRmDmpRhd4ye UZQhmC1SXxaJ22Y7l2nG4oPJeoTH
+=> prova strcpy 2
+WA26pjRcDfHcXOWrUAjpQa3SDbzHGn1t
+DfHcXOWrUAjpQa3SDbzHGn1t
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+65
+=> prova strcpy 1
+qEMkCEIYZRmDmpRhd4ye UZQhmC1SXxaJ22Y7l2nG4oPJeoTH
+87F9C0i9qEMkCEIYZRmDmpRhd4ye UZQhmC1SXxaJ22Y7l2nG4oPJeoTH
+=> prova strcpy 2
+WA26pjRcDfHcXOWrUAjpQa3SDbzHGn1t
+DfHcXOWrUAjpQa3SDbzHGn1t
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 6 ====
+==== ASSEMBLY ====
+=> prova strlen
+35
+=> prova strcpy 1
+DQenSG
+VN8z
+=> prova strcpy 2
+ZzDAhCRnogjSzAV7xwOUihwZxEhk9RPy Jq MCheC1RGjF8wUo2VT 9Vpm7Wg3GLkXJv
+ogjSzAV7xwOUihwZxEhk9RPy Jq MCheC1RGjF8wUo2VT 9Vpm7Wg3GLkXJv
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+35
+=> prova strcpy 1
+DQenSG
+VN8z
+=> prova strcpy 2
+ZzDAhCRnogjSzAV7xwOUihwZxEhk9RPy Jq MCheC1RGjF8wUo2VT 9Vpm7Wg3GLkXJv
+ogjSzAV7xwOUihwZxEhk9RPy Jq MCheC1RGjF8wUo2VT 9Vpm7Wg3GLkXJv
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 7 ====
+==== ASSEMBLY ====
+=> prova strlen
+67
+=> prova strcpy 1
+xT9mO7RRvyDMAOOYo4YNAqf
+RHOGTzxaxT9mO7RRvyDMAOOYo4YNAqf
+=> prova strcpy 2
+mwX8HxZeRN3KsWSZ
+RN3KsWSZ
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+5
+
+
+======= C ========
+=> prova strlen
+67
+=> prova strcpy 1
+xT9mO7RRvyDMAOOYo4YNAqf
+RHOGTzxaxT9mO7RRvyDMAOOYo4YNAqf
+=> prova strcpy 2
+mwX8HxZeRN3KsWSZ
+RN3KsWSZ
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+5
+
+
+=> PASSED
+
+
+
+==== TEST 8 ====
+==== ASSEMBLY ====
+=> prova strlen
+51
+=> prova strcpy 1
+CH
+V7nukncoCH
+=> prova strcpy 2
+k9ocy6bjwDBUsYwonhNMv4isBkfKOKa0Pt
+wDBUsYwonhNMv4isBkfKOKa0Pt
+=> prova strcmp
+1
+=> prova strchr
+14
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+51
+=> prova strcpy 1
+CH
+V7nukncoCH
+=> prova strcpy 2
+k9ocy6bjwDBUsYwonhNMv4isBkfKOKa0Pt
+wDBUsYwonhNMv4isBkfKOKa0Pt
+=> prova strcmp
+1
+=> prova strchr
+14
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 9 ====
+==== ASSEMBLY ====
+=> prova strlen
+39
+=> prova strcpy 1
+bB NjmvoYnNWABMKT6zGRmUmU5CgcjJlrtYh
+B42HdfeabB NjmvoYnNWABMKT6zGRmUmU5CgcjJlrtYh
+=> prova strcpy 2
+xxvqbZUUBrcokPcK2hsSn8iTPJBbbXyMTBLOkEMOEM8z1wTzeGX
+BrcokPcK2hsSn8iTPJBbbXyMTBLOkEMOEM8z1wTzeGX
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+51
+
+
+======= C ========
+=> prova strlen
+39
+=> prova strcpy 1
+bB NjmvoYnNWABMKT6zGRmUmU5CgcjJlrtYh
+B42HdfeabB NjmvoYnNWABMKT6zGRmUmU5CgcjJlrtYh
+=> prova strcpy 2
+xxvqbZUUBrcokPcK2hsSn8iTPJBbbXyMTBLOkEMOEM8z1wTzeGX
+BrcokPcK2hsSn8iTPJBbbXyMTBLOkEMOEM8z1wTzeGX
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+51
+
+
+=> PASSED
+
+
+
+==== TEST 10 ====
+==== ASSEMBLY ====
+=> prova strlen
+9
+=> prova strcpy 1
+B8vblxBeeZW LjLV1avRCsQmgO4OC
+weF33
+=> prova strcpy 2
+MjdPOvPoyyMLSfwlE93Cwwd3rIUSAyLH6LgoxcxwIg5t832XwgqIwZRxjI3zBzoxLyRL052GdfY1
+yyMLSfwlE93Cwwd3rIUSAyLH6LgoxcxwIg5t832XwgqIwZRxjI3zBzoxLyRL052GdfY1
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+9
+=> prova strcpy 1
+B8vblxBeeZW LjLV1avRCsQmgO4OC
+weF33
+=> prova strcpy 2
+MjdPOvPoyyMLSfwlE93Cwwd3rIUSAyLH6LgoxcxwIg5t832XwgqIwZRxjI3zBzoxLyRL052GdfY1
+yyMLSfwlE93Cwwd3rIUSAyLH6LgoxcxwIg5t832XwgqIwZRxjI3zBzoxLyRL052GdfY1
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 11 ====
+==== ASSEMBLY ====
+=> prova strlen
+22
+=> prova strcpy 1
+8vU IlMbruhZIIMDmSt 0ChiZQ4hH
+0
+=> prova strcpy 2
+Vna8ALVBuhhr6ii6nrKDD
+uhhr6ii6nrKDD
+=> prova strcmp
+1
+=> prova strchr
+22
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+22
+=> prova strcpy 1
+8vU IlMbruhZIIMDmSt 0ChiZQ4hH
+0
+=> prova strcpy 2
+Vna8ALVBuhhr6ii6nrKDD
+uhhr6ii6nrKDD
+=> prova strcmp
+1
+=> prova strchr
+22
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 12 ====
+==== ASSEMBLY ====
+=> prova strlen
+57
+=> prova strcpy 1
+uVPGB3lIHTNtgkCt7jQV0uJPsY0eqX2H8mVu3YYj5SnPTmwgghLMyTDFMVbFxGE
+1MVWEtzsuVPGB3lIHTNtgkCt7jQV0uJPsY0eqX2H8mVu3YYj5SnPTmwgghLMyTDFMVbFxGE
+=> prova strcpy 2
+hfwuB ibOg8BgsYP6ni1bHtC2coimLKEzfrAkaT Nh
+Og8BgsYP6ni1bHtC2coimLKEzfrAkaT Nh
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+57
+=> prova strcpy 1
+uVPGB3lIHTNtgkCt7jQV0uJPsY0eqX2H8mVu3YYj5SnPTmwgghLMyTDFMVbFxGE
+1MVWEtzsuVPGB3lIHTNtgkCt7jQV0uJPsY0eqX2H8mVu3YYj5SnPTmwgghLMyTDFMVbFxGE
+=> prova strcpy 2
+hfwuB ibOg8BgsYP6ni1bHtC2coimLKEzfrAkaT Nh
+Og8BgsYP6ni1bHtC2coimLKEzfrAkaT Nh
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 13 ====
+==== ASSEMBLY ====
+=> prova strlen
+11
+=> prova strcpy 1
+uoVqrThifFOcuy6rnjJIgwtVbRC36t0Iet24Kw5l5GRJPuRndHWh97pc
+8IJ4BntxuoVqrThifFOcuy6rnjJIgwtVbRC36t0Iet24Kw5l5GRJPuRndHWh97pc
+=> prova strcpy 2
+eKQ79ySFGyZUNnAzmKw2
+GyZUNnAzmKw2
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+11
+=> prova strcpy 1
+uoVqrThifFOcuy6rnjJIgwtVbRC36t0Iet24Kw5l5GRJPuRndHWh97pc
+8IJ4BntxuoVqrThifFOcuy6rnjJIgwtVbRC36t0Iet24Kw5l5GRJPuRndHWh97pc
+=> prova strcpy 2
+eKQ79ySFGyZUNnAzmKw2
+GyZUNnAzmKw2
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 14 ====
+==== ASSEMBLY ====
+=> prova strlen
+41
+=> prova strcpy 1
+8EyDu2HLS30Ga
+4rOw428Q8EyDu2HLS30Ga
+=> prova strcpy 2
+irqtlq9yHCBbOiNiYrbIdIiDn7N7xwXaKYVargUjh4Lc7zzC lrsyMVx
+HCBbOiNiYrbIdIiDn7N7xwXaKYVargUjh4Lc7zzC lrsyMVx
+=> prova strcmp
+1
+=> prova strchr
+37
+=> prova strrchr
+16
+
+
+======= C ========
+=> prova strlen
+41
+=> prova strcpy 1
+8EyDu2HLS30Ga
+4rOw428Q8EyDu2HLS30Ga
+=> prova strcpy 2
+irqtlq9yHCBbOiNiYrbIdIiDn7N7xwXaKYVargUjh4Lc7zzC lrsyMVx
+HCBbOiNiYrbIdIiDn7N7xwXaKYVargUjh4Lc7zzC lrsyMVx
+=> prova strcmp
+1
+=> prova strchr
+37
+=> prova strrchr
+16
+
+
+=> PASSED
+
+
+
+==== TEST 15 ====
+==== ASSEMBLY ====
+=> prova strlen
+5
+=> prova strcpy 1
+AM2SLW1kTnDpzx04kUiwf6QoOTwZYVZjFN3cbQsTyO wPMNAPOAtX9IkerctKLT0
+Esym4wjaAM2SLW1kTnDpzx04kUiwf6QoOTwZYVZjFN3cbQsTyO wPMNAPOAtX9IkerctKLT0
+=> prova strcpy 2
+T7aFXlxK6oUjBKYUz9UkOizo1fKVTtsPjz4HYZm305U5QjHfxPD8yq8TqGtMNJNJoLq
+6oUjBKYUz9UkOizo1fKVTtsPjz4HYZm305U5QjHfxPD8yq8TqGtMNJNJoLq
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+8
+
+
+======= C ========
+=> prova strlen
+5
+=> prova strcpy 1
+AM2SLW1kTnDpzx04kUiwf6QoOTwZYVZjFN3cbQsTyO wPMNAPOAtX9IkerctKLT0
+Esym4wjaAM2SLW1kTnDpzx04kUiwf6QoOTwZYVZjFN3cbQsTyO wPMNAPOAtX9IkerctKLT0
+=> prova strcpy 2
+T7aFXlxK6oUjBKYUz9UkOizo1fKVTtsPjz4HYZm305U5QjHfxPD8yq8TqGtMNJNJoLq
+6oUjBKYUz9UkOizo1fKVTtsPjz4HYZm305U5QjHfxPD8yq8TqGtMNJNJoLq
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+8
+
+
+=> PASSED
+
+
+
+==== TEST 16 ====
+==== ASSEMBLY ====
+=> prova strlen
+13
+=> prova strcpy 1
+Rqk4JSnEH7C7jwnBK8Xa8EHe4JUV4qr48L
+aiu8eaChRqk4JSnEH7C7jwnBK8Xa8EHe4JUV4qr48L
+=> prova strcpy 2
+F5LaIVegrDgsAJpfy7mR8Ky5sSGRFqi1rIII5 uDL08Smz6s5JOFsPXVU0xPPUcZPklyz2jec
+rDgsAJpfy7mR8Ky5sSGRFqi1rIII5 uDL08Smz6s5JOFsPXVU0xPPUcZPklyz2jec
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+34
+
+
+======= C ========
+=> prova strlen
+13
+=> prova strcpy 1
+Rqk4JSnEH7C7jwnBK8Xa8EHe4JUV4qr48L
+aiu8eaChRqk4JSnEH7C7jwnBK8Xa8EHe4JUV4qr48L
+=> prova strcpy 2
+F5LaIVegrDgsAJpfy7mR8Ky5sSGRFqi1rIII5 uDL08Smz6s5JOFsPXVU0xPPUcZPklyz2jec
+rDgsAJpfy7mR8Ky5sSGRFqi1rIII5 uDL08Smz6s5JOFsPXVU0xPPUcZPklyz2jec
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+34
+
+
+=> PASSED
+
+
+
+==== TEST 17 ====
+==== ASSEMBLY ====
+=> prova strlen
+42
+=> prova strcpy 1
+xy l6rNH0ubBZiFk2AxTJ5M
+maGuJ1wXxy l6rNH0ubBZiFk2AxTJ5M
+=> prova strcpy 2
+We0lNuP16xtyuP5vFndf51FNRUhFBs7irnvDaHqD
+6xtyuP5vFndf51FNRUhFBs7irnvDaHqD
+=> prova strcmp
+-1
+=> prova strchr
+9
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+42
+=> prova strcpy 1
+xy l6rNH0ubBZiFk2AxTJ5M
+maGuJ1wXxy l6rNH0ubBZiFk2AxTJ5M
+=> prova strcpy 2
+We0lNuP16xtyuP5vFndf51FNRUhFBs7irnvDaHqD
+6xtyuP5vFndf51FNRUhFBs7irnvDaHqD
+=> prova strcmp
+-1
+=> prova strchr
+9
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 18 ====
+==== ASSEMBLY ====
+=> prova strlen
+14
+=> prova strcpy 1
+5oEhNFAAHobaoG38ukBSTyQfIDPL
+AqDaMrf45oEhNFAAHobaoG38ukBSTyQfIDPL
+=> prova strcpy 2
+L8EXtP6WOKemG roxiAEo5eQM1
+OKemG roxiAEo5eQM1
+=> prova strcmp
+1
+=> prova strchr
+34
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+14
+=> prova strcpy 1
+5oEhNFAAHobaoG38ukBSTyQfIDPL
+AqDaMrf45oEhNFAAHobaoG38ukBSTyQfIDPL
+=> prova strcpy 2
+L8EXtP6WOKemG roxiAEo5eQM1
+OKemG roxiAEo5eQM1
+=> prova strcmp
+1
+=> prova strchr
+34
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 19 ====
+==== ASSEMBLY ====
+=> prova strlen
+35
+=> prova strcpy 1
+YjZQF1poy9EWXT35mp OIPfYtco63 HbjeZZS69XD8UCUYb4FKM6EAIrC1lM8bC74Q1t9AFgWEC
+P2TTSiV0YjZQF1poy9EWXT35mp OIPfYtco63 HbjeZZS69XD8UCUYb4FKM6EAIrC1lM8bC74Q1t9AFgWEC
+=> prova strcpy 2
+NjJrE26E8BIGqA0DKSaZe6qcbfBlvuwc91H Rbuabrl4KZ3Cr6TQDP6ao5jCfJ6Mbf1WkUtLdk
+8BIGqA0DKSaZe6qcbfBlvuwc91H Rbuabrl4KZ3Cr6TQDP6ao5jCfJ6Mbf1WkUtLdk
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+35
+=> prova strcpy 1
+YjZQF1poy9EWXT35mp OIPfYtco63 HbjeZZS69XD8UCUYb4FKM6EAIrC1lM8bC74Q1t9AFgWEC
+P2TTSiV0YjZQF1poy9EWXT35mp OIPfYtco63 HbjeZZS69XD8UCUYb4FKM6EAIrC1lM8bC74Q1t9AFgWEC
+=> prova strcpy 2
+NjJrE26E8BIGqA0DKSaZe6qcbfBlvuwc91H Rbuabrl4KZ3Cr6TQDP6ao5jCfJ6Mbf1WkUtLdk
+8BIGqA0DKSaZe6qcbfBlvuwc91H Rbuabrl4KZ3Cr6TQDP6ao5jCfJ6Mbf1WkUtLdk
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 20 ====
+==== ASSEMBLY ====
+=> prova strlen
+37
+=> prova strcpy 1
+r1hwlcMCmZNBmxczc1nmU7qKKschhqVjc6M27UUMgP8FcY ZWF4pCIXjDpHGX10y
+pnQddiA1r1hwlcMCmZNBmxczc1nmU7qKKschhqVjc6M27UUMgP8FcY ZWF4pCIXjDpHGX10y
+=> prova strcpy 2
+WpsWrF
+mZNBmxczc1nmU7qKKschhqVjc6M27UUMgP8FcY ZWF4pCIXjDpHGX10y
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+37
+=> prova strcpy 1
+r1hwlcMCmZNBmxczc1nmU7qKKschhqVjc6M27UUMgP8FcY ZWF4pCIXjDpHGX10y
+pnQddiA1r1hwlcMCmZNBmxczc1nmU7qKKschhqVjc6M27UUMgP8FcY ZWF4pCIXjDpHGX10y
+=> prova strcpy 2
+WpsWrF
+mZNBmxczc1nmU7qKKschhqVjc6M27UUMgP8FcY ZWF4pCIXjDpHGX10y
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 21 ====
+==== ASSEMBLY ====
+=> prova strlen
+16
+=> prova strcpy 1
+m0vp2cszb6NJFGMlhXaRooPPwu1Uq85w44Bo8K3Ng
+y4JVPYszm0vp2cszb6NJFGMlhXaRooPPwu1Uq85w44Bo8K3Ng
+=> prova strcpy 2
+vouOaoJh6F6e4iQd2
+6F6e4iQd2
+=> prova strcmp
+-1
+=> prova strchr
+67
+=> prova strrchr
+51
+
+
+======= C ========
+=> prova strlen
+16
+=> prova strcpy 1
+m0vp2cszb6NJFGMlhXaRooPPwu1Uq85w44Bo8K3Ng
+y4JVPYszm0vp2cszb6NJFGMlhXaRooPPwu1Uq85w44Bo8K3Ng
+=> prova strcpy 2
+vouOaoJh6F6e4iQd2
+6F6e4iQd2
+=> prova strcmp
+-1
+=> prova strchr
+67
+=> prova strrchr
+51
+
+
+=> PASSED
+
+
+
+==== TEST 22 ====
+==== ASSEMBLY ====
+=> prova strlen
+3
+=> prova strcpy 1
+SEgKFjRuW4SCbC Za8bcNumJH2Kd4
+pMeHknO SEgKFjRuW4SCbC Za8bcNumJH2Kd4
+=> prova strcpy 2
+zomYVChs
+
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+11
+
+
+======= C ========
+=> prova strlen
+3
+=> prova strcpy 1
+SEgKFjRuW4SCbC Za8bcNumJH2Kd4
+pMeHknO SEgKFjRuW4SCbC Za8bcNumJH2Kd4
+=> prova strcpy 2
+zomYVChs
+
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+11
+
+
+=> PASSED
+
+
+
+==== TEST 23 ====
+==== ASSEMBLY ====
+=> prova strlen
+78
+=> prova strcpy 1
+6v1CWnG aBcnLl4WbEohZfji81nmL8Hy0oI0YCSsZvjaosA74
+tla9Y7RO6v1CWnG aBcnLl4WbEohZfji81nmL8Hy0oI0YCSsZvjaosA74
+=> prova strcpy 2
+xzHzta2fEEialN8ROUM26BR84pj9qmw2VNjrahEfuwqQvSa exGd
+EEialN8ROUM26BR84pj9qmw2VNjrahEfuwqQvSa exGd
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+37
+
+
+======= C ========
+=> prova strlen
+78
+=> prova strcpy 1
+6v1CWnG aBcnLl4WbEohZfji81nmL8Hy0oI0YCSsZvjaosA74
+tla9Y7RO6v1CWnG aBcnLl4WbEohZfji81nmL8Hy0oI0YCSsZvjaosA74
+=> prova strcpy 2
+xzHzta2fEEialN8ROUM26BR84pj9qmw2VNjrahEfuwqQvSa exGd
+EEialN8ROUM26BR84pj9qmw2VNjrahEfuwqQvSa exGd
+=> prova strcmp
+-1
+=> prova strchr
+0
+=> prova strrchr
+37
+
+
+=> PASSED
+
+
+
+==== TEST 24 ====
+==== ASSEMBLY ====
+=> prova strlen
+27
+=> prova strcpy 1
+d1rzwzQHnmtwuS0vK1Q6icMflAU RjnIxiPyDT0GA1oFhAgykQ9HJhGwwdTStBRnQr
+2UUMFQusd1rzwzQHnmtwuS0vK1Q6icMflAU RjnIxiPyDT0GA1oFhAgykQ9HJhGwwdTStBRnQr
+=> prova strcpy 2
+tCVmIi7haf968D7g ped0ktsiywy6Rw2LFmLGJPW2x6JzPnRCGAHK
+af968D7g ped0ktsiywy6Rw2LFmLGJPW2x6JzPnRCGAHK
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+27
+=> prova strcpy 1
+d1rzwzQHnmtwuS0vK1Q6icMflAU RjnIxiPyDT0GA1oFhAgykQ9HJhGwwdTStBRnQr
+2UUMFQusd1rzwzQHnmtwuS0vK1Q6icMflAU RjnIxiPyDT0GA1oFhAgykQ9HJhGwwdTStBRnQr
+=> prova strcpy 2
+tCVmIi7haf968D7g ped0ktsiywy6Rw2LFmLGJPW2x6JzPnRCGAHK
+af968D7g ped0ktsiywy6Rw2LFmLGJPW2x6JzPnRCGAHK
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 25 ====
+==== ASSEMBLY ====
+=> prova strlen
+10
+=> prova strcpy 1
+Na9WvSPElznfpalAAEiFXIPJtqzFSAnJeRuUZW3Sy2JYNNf rCJ
+G29lzoNYNa9WvSPElznfpalAAEiFXIPJtqzFSAnJeRuUZW3Sy2JYNNf rCJ
+=> prova strcpy 2
+mMdy2HXeV Bj7pGJ3mqVklPG2Qg7iHpa
+V Bj7pGJ3mqVklPG2Qg7iHpa
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+10
+=> prova strcpy 1
+Na9WvSPElznfpalAAEiFXIPJtqzFSAnJeRuUZW3Sy2JYNNf rCJ
+G29lzoNYNa9WvSPElznfpalAAEiFXIPJtqzFSAnJeRuUZW3Sy2JYNNf rCJ
+=> prova strcpy 2
+mMdy2HXeV Bj7pGJ3mqVklPG2Qg7iHpa
+V Bj7pGJ3mqVklPG2Qg7iHpa
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 26 ====
+==== ASSEMBLY ====
+=> prova strlen
+33
+=> prova strcpy 1
+KKOBkMYLeFQh8JPfSaFtO Nq5g1l5OvBAYzrqdOWs3yuUnR4rOsVN2dqns6dWSVciyS
+ntHAiY8YKKOBkMYLeFQh8JPfSaFtO Nq5g1l5OvBAYzrqdOWs3yuUnR4rOsVN2dqns6dWSVciyS
+=> prova strcpy 2
+zKAp4uCT209mRrs4CrZbGd7S7CD8ep3lTMjhsWDu7RmZcMLUo4U7Br vfqGPTrYVnSEL4OrHL1m
+209mRrs4CrZbGd7S7CD8ep3lTMjhsWDu7RmZcMLUo4U7Br vfqGPTrYVnSEL4OrHL1m
+=> prova strcmp
+1
+=> prova strchr
+1
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+33
+=> prova strcpy 1
+KKOBkMYLeFQh8JPfSaFtO Nq5g1l5OvBAYzrqdOWs3yuUnR4rOsVN2dqns6dWSVciyS
+ntHAiY8YKKOBkMYLeFQh8JPfSaFtO Nq5g1l5OvBAYzrqdOWs3yuUnR4rOsVN2dqns6dWSVciyS
+=> prova strcpy 2
+zKAp4uCT209mRrs4CrZbGd7S7CD8ep3lTMjhsWDu7RmZcMLUo4U7Br vfqGPTrYVnSEL4OrHL1m
+209mRrs4CrZbGd7S7CD8ep3lTMjhsWDu7RmZcMLUo4U7Br vfqGPTrYVnSEL4OrHL1m
+=> prova strcmp
+1
+=> prova strchr
+1
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 27 ====
+==== ASSEMBLY ====
+=> prova strlen
+42
+=> prova strcpy 1
+qJHhvxSZl
+KoJenwSWqJHhvxSZl
+=> prova strcpy 2
+Fg
+l
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+42
+=> prova strcpy 1
+qJHhvxSZl
+KoJenwSWqJHhvxSZl
+=> prova strcpy 2
+Fg
+l
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 28 ====
+==== ASSEMBLY ====
+=> prova strlen
+22
+=> prova strcpy 1
+4upROW5wRlXk9OMCBI8mC
+0qQuc 6j4upROW5wRlXk9OMCBI8mC
+=> prova strcpy 2
+cteu9PhCDIL8khpUcBq3F6sv9bIaIJyMwtcqEhUOHRTb4
+DIL8khpUcBq3F6sv9bIaIJyMwtcqEhUOHRTb4
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+22
+=> prova strcpy 1
+4upROW5wRlXk9OMCBI8mC
+0qQuc 6j4upROW5wRlXk9OMCBI8mC
+=> prova strcpy 2
+cteu9PhCDIL8khpUcBq3F6sv9bIaIJyMwtcqEhUOHRTb4
+DIL8khpUcBq3F6sv9bIaIJyMwtcqEhUOHRTb4
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 29 ====
+==== ASSEMBLY ====
+=> prova strlen
+6
+=> prova strcpy 1
+AOMgZsp8I6u4YkW2ns1VxIHRvElYJIF4a8eVYqHYCfqPqEIlAKGDLBB
+pjfDKhcBAOMgZsp8I6u4YkW2ns1VxIHRvElYJIF4a8eVYqHYCfqPqEIlAKGDLBB
+=> prova strcpy 2
+fMI
+I6u4YkW2ns1VxIHRvElYJIF4a8eVYqHYCfqPqEIlAKGDLBB
+=> prova strcmp
+-1
+=> prova strchr
+10
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+6
+=> prova strcpy 1
+AOMgZsp8I6u4YkW2ns1VxIHRvElYJIF4a8eVYqHYCfqPqEIlAKGDLBB
+pjfDKhcBAOMgZsp8I6u4YkW2ns1VxIHRvElYJIF4a8eVYqHYCfqPqEIlAKGDLBB
+=> prova strcpy 2
+fMI
+I6u4YkW2ns1VxIHRvElYJIF4a8eVYqHYCfqPqEIlAKGDLBB
+=> prova strcmp
+-1
+=> prova strchr
+10
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 30 ====
+==== ASSEMBLY ====
+=> prova strlen
+22
+=> prova strcpy 1
+G8RXApOTX UjaQ6Ns9mx
+9EfBMAZ6G8RXApOTX UjaQ6Ns9mx
+=> prova strcpy 2
+G7vJ5JbbLXxkiZ6 G1RrsNpppD7yOlt6KIVvokHVxEX7rKa9jeydTcMNM2f1yzVEhvPOiX
+LXxkiZ6 G1RrsNpppD7yOlt6KIVvokHVxEX7rKa9jeydTcMNM2f1yzVEhvPOiX
+=> prova strcmp
+1
+=> prova strchr
+54
+=> prova strrchr
+23
+
+
+======= C ========
+=> prova strlen
+22
+=> prova strcpy 1
+G8RXApOTX UjaQ6Ns9mx
+9EfBMAZ6G8RXApOTX UjaQ6Ns9mx
+=> prova strcpy 2
+G7vJ5JbbLXxkiZ6 G1RrsNpppD7yOlt6KIVvokHVxEX7rKa9jeydTcMNM2f1yzVEhvPOiX
+LXxkiZ6 G1RrsNpppD7yOlt6KIVvokHVxEX7rKa9jeydTcMNM2f1yzVEhvPOiX
+=> prova strcmp
+1
+=> prova strchr
+54
+=> prova strrchr
+23
+
+
+=> PASSED
+
+
+
+==== TEST 31 ====
+==== ASSEMBLY ====
+=> prova strlen
+47
+=> prova strcpy 1
+kCiRRLmIP6Aq4D65HGsPfQorHzN9ONLu
+buP8bAmxkCiRRLmIP6Aq4D65HGsPfQorHzN9ONLu
+=> prova strcpy 2
+Byq mhO U3UOwUALKKOOM7Mvy8kAQDMH5SOggaQQM6hhC1rDqAjT3unHpvEQRt5tKw1m1R1r7R77q
+U3UOwUALKKOOM7Mvy8kAQDMH5SOggaQQM6hhC1rDqAjT3unHpvEQRt5tKw1m1R1r7R77q
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+25
+
+
+======= C ========
+=> prova strlen
+47
+=> prova strcpy 1
+kCiRRLmIP6Aq4D65HGsPfQorHzN9ONLu
+buP8bAmxkCiRRLmIP6Aq4D65HGsPfQorHzN9ONLu
+=> prova strcpy 2
+Byq mhO U3UOwUALKKOOM7Mvy8kAQDMH5SOggaQQM6hhC1rDqAjT3unHpvEQRt5tKw1m1R1r7R77q
+U3UOwUALKKOOM7Mvy8kAQDMH5SOggaQQM6hhC1rDqAjT3unHpvEQRt5tKw1m1R1r7R77q
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+25
+
+
+=> PASSED
+
+
+
+==== TEST 32 ====
+==== ASSEMBLY ====
+=> prova strlen
+18
+=> prova strcpy 1
+I2n2diLpwUQeB  1 Yr3U4cffRAlhTHNMbYKb1UZH39SYbHU4HUlS2FaUwh
+BQ37ksKVI2n2diLpwUQeB  1 Yr3U4cffRAlhTHNMbYKb1UZH39SYbHU4HUlS2FaUwh
+=> prova strcpy 2
+AAjbl
+wUQeB  1 Yr3U4cffRAlhTHNMbYKb1UZH39SYbHU4HUlS2FaUwh
+=> prova strcmp
+-1
+=> prova strchr
+59
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+18
+=> prova strcpy 1
+I2n2diLpwUQeB  1 Yr3U4cffRAlhTHNMbYKb1UZH39SYbHU4HUlS2FaUwh
+BQ37ksKVI2n2diLpwUQeB  1 Yr3U4cffRAlhTHNMbYKb1UZH39SYbHU4HUlS2FaUwh
+=> prova strcpy 2
+AAjbl
+wUQeB  1 Yr3U4cffRAlhTHNMbYKb1UZH39SYbHU4HUlS2FaUwh
+=> prova strcmp
+-1
+=> prova strchr
+59
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 33 ====
+==== ASSEMBLY ====
+=> prova strlen
+25
+=> prova strcpy 1
+5jQY6sldL4ljh5TUMz1UPnzXepL
+yE0fA5ps5jQY6sldL4ljh5TUMz1UPnzXepL
+=> prova strcpy 2
+Py5ZF2Na6eLTP9AQ2hEFGqEHikH4caHDQmBH5M3aS9VD52m5WPkTzxa28KJr3GpjFTw
+6eLTP9AQ2hEFGqEHikH4caHDQmBH5M3aS9VD52m5WPkTzxa28KJr3GpjFTw
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+======= C ========
+=> prova strlen
+25
+=> prova strcpy 1
+5jQY6sldL4ljh5TUMz1UPnzXepL
+yE0fA5ps5jQY6sldL4ljh5TUMz1UPnzXepL
+=> prova strcpy 2
+Py5ZF2Na6eLTP9AQ2hEFGqEHikH4caHDQmBH5M3aS9VD52m5WPkTzxa28KJr3GpjFTw
+6eLTP9AQ2hEFGqEHikH4caHDQmBH5M3aS9VD52m5WPkTzxa28KJr3GpjFTw
+=> prova strcmp
+1
+=> prova strchr
+0
+=> prova strrchr
+0
+
+
+=> PASSED
+
+
+
+==== TEST 34 ====
+==== ASSEMBLY ====
+=> prova strlen
+13
+=> prova strcpy 1
+uuckXwKpqPBWgruOferOEOK1hSvYA1sUFINUtRryS1LkyDhQnAKk1tu16s7xQbWMP41wKwWgprfQ4fW
+hAHhGFv5uuckXwKpqPBWgruOferOEOK1hSvYA1sUFINUtRryS1LkyDhQnAKk1tu16s7xQbWMP41wKwWgprfQ4fW
+=> prova strcpy 2
+JYI68kl9iU7B6xMK9Efqq
+iU7B6xMK9Efqq
+=> prova strcmp
+1
+=> prova strchr
+11
+=> prova strrchr
+11
+
+
+======= C ========
+=> prova strlen
+13
+=> prova strcpy 1
+uuckXwKpqPBWgruOferOEOK1hSvYA1sUFINUtRryS1LkyDhQnAKk1tu16s7xQbWMP41wKwWgprfQ4fW
+hAHhGFv5uuckXwKpqPBWgruOferOEOK1hSvYA1sUFINUtRryS1LkyDhQnAKk1tu16s7xQbWMP41wKwWgprfQ4fW
+=> prova strcpy 2
+JYI68kl9iU7B6xMK9Efqq
+iU7B6xMK9Efqq
+=> prova strcmp
+1
+=> prova strchr
+11
+=> prova strrchr
+11
+
+
+=> PASSED
+
+
+
