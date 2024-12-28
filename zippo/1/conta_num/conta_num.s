@@ -20,7 +20,7 @@ loop: # cicla sull'array
 	cmp %esi, array_len
 	je dopo
 	
-	cmp %bx, array(,%esi,2)
+	cmpw %bx, array(,%esi,2)
 	jne step
 
 	inc %cl
@@ -31,7 +31,7 @@ step: # prossimo passo iterativo
 
 dopo: # esegui dopo il loop, stampa
 	mov %cl, %al
-	call outbyte
+	call outdecimal_byte
 	call newline
 
 	ret

@@ -1,6 +1,7 @@
-# leggere un messaggio da terminale
-# convertire le lettere maiuscole in minuscole
-# stampare il messaggio modificato
+# 1. Leggere messaggio da terminale.
+# 2. Convertire le lettere minuscole in maiuscolo.
+# 3. Stampare messaggio modificato.
+# stavolta con le istruzioni di stringa
 
 .include "./files/utility.s"
 
@@ -17,14 +18,14 @@ _main:
 	lea msg_in, %ebx
 	call inline
 
-.secondo: # converti stringa
+.secondo: # converti string
 	lea msg_in, %esi
 	lea msg_out, %edi
-	mov $0, %ecx
+	
+	cld
 
 loop:
-	# offset(%base, %indice, scala(1, 2, 4, ...))
-	movb (%esi, %ecx), %al
+	lodsb
 
 	cmp $'a', %al
 	jb dopo
@@ -34,11 +35,11 @@ loop:
 	and $0xdf, %al # 1101 1111
 
 dopo:
-	movb %al, (%edi, %ecx)
-	inc %ecx
+	stosb
+
 	cmp $'\r', %al
 	jne loop
-
+	
 .terzo: # stampa stringa
 	lea msg_out, %ebx
 	call outline

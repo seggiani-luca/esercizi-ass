@@ -1,4 +1,3 @@
-
 # leggere 2 numeri interi in base 10, calcolarne il prodotto, e stampare il risultato.
 
 # lettura:
