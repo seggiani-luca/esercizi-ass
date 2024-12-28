@@ -8,3 +8,6 @@
 !*/
 
 *.lst
+
+# non sono miei
+*.pdf
